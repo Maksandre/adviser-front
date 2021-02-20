@@ -1,22 +1,13 @@
 import React from 'react';
-import { useEffect } from 'react';
-import { Provider, useSelector } from 'react-redux';
+import { Provider } from 'react-redux';
 
-import { AppNavigation } from './src/navigation/AppNavigation';
-import { LoginNavigation } from './src/navigation/LoginNavigation';
+import RootNavigation from './src/navigation';
 import store from './src/store';
 
-export default function AppWrapper() {
+export default function App() {
   return (
     <Provider store={store}>
-      <App />
+      <RootNavigation />
     </Provider>
   );
 }
-
-const App = () => {
-  const user = useSelector((store) => store.user);
-  console.log(user);
-
-  return !user ? <AppNavigation /> : <LoginNavigation />; // TODO reverse for testing
-};

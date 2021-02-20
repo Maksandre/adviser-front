@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useEffect } from 'react/cjs/react.development';
 
 import { getUser } from '../store/actions/user';
 import { AppNavigation } from './AppNavigation';
@@ -8,10 +7,10 @@ import { LoginNavigation } from './LoginNavigation';
 
 const RootNavigation = ({ getUser, user }) => {
   useEffect(() => {
-    getUser().then(console.log(user));
+    getUser();
   }, []);
 
-  return !user ? <AppNavigation /> : <LoginNavigation />; // TODO reverse for testing
+  return user ? <AppNavigation /> : <LoginNavigation />; // TODO reverse for testing
 };
 
 function mapStateToProps(state) {

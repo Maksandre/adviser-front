@@ -4,7 +4,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { CashFlowScreen } from '../screens/CashFlowScreen';
-import { MainScreen } from '../screens/MainScreen';
+import MainScreen from '../screens/MainScreen';
 import { GoalScreen } from '../screens/GoalScreen';
 import { ROUTES } from '../constants/routes';
 

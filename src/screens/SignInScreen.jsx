@@ -1,10 +1,18 @@
 import React from 'react';
-import { View, TextInput, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Button } from 'react-native';
+import { connect } from 'react-redux';
+import { loginUser } from '../store/actions/user';
 
-export const SignInScreen = () => {
+const SignInScreen = ({ loginUser }) => {
   return (
     <View style={styles.container}>
       <Text>Sign In</Text>
+      <Button
+        title="Login"
+        onPress={() => {
+          loginUser();
+        }}
+      />
     </View>
   );
 };
@@ -16,3 +24,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+const mapDispatchToProps = {
+  loginUser,
+};
+
+export default connect(null, mapDispatchToProps)(SignInScreen);

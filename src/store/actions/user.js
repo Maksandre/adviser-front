@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { GET_USER_SUCCESS } from '../../model/user';
+import { GET_USER_SUCCESS } from '../model/user';
 
 export function getUser() {
   return function (dispatch) {

@@ -1,4 +1,4 @@
-import { GET_USER_SUCCESS, userInitialState } from '../../model/user';
+import { GET_USER_SUCCESS, userInitialState } from '../model/user';
 
 export const userReducer = (state = userInitialState, action) => {
   switch (action.type) {

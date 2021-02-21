@@ -1,12 +1,18 @@
 import React from 'react';
 import { View, StyleSheet, Text, Button } from 'react-native';
 import { connect } from 'react-redux';
-import { loginUser } from '../store/actions/user';
+import { loginUser, createUser } from '../store/actions/user';
 
-const SignInScreen = ({ loginUser }) => {
+const SignInScreen = ({ loginUser, createUser }) => {
   return (
     <View style={styles.container}>
       <Text>Sign In</Text>
+      <Button
+        title="Sign Up"
+        onPress={() => {
+          createUser({ email: 'testfromapi@test.tt', password: '123' });
+        }}
+      />
       <Button
         title="Login"
         onPress={() => {
@@ -27,6 +33,7 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = {
   loginUser,
+  createUser,
 };
 
 export default connect(null, mapDispatchToProps)(SignInScreen);

@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { GET_USER_SUCCESS } from '../model/user';
+import api from '../../http';
 
 export function getUser() {
   return function (dispatch) {
@@ -37,5 +38,16 @@ export function logOutUser() {
       console.log('LOGOUT');
       dispatch({ type: GET_USER_SUCCESS, user: null });
     });
+  };
+}
+
+export function createUser(user) {
+  return function (dispatch) {
+    return api.user
+      .signUp(user)
+      .then((response) =>
+        dispatch({ type: GET_USER_SUCCESS, user: { email: response.email } })
+      )
+      .catch((err) => console.log(err));
   };
 }

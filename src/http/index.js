@@ -1,3 +1,3 @@
-import * as auth from './authApi';
+import * as user from './userApi';
 
-export default { auth };
+export default { user };

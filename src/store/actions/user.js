@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { GET_USER_SUCCESS } from '../model/user';
+import { GET_USER_SUCCESS, CREATE_USER_SUCCESS } from '../model/user';
 import api from '../../http';
 
 export function getUser() {
@@ -12,7 +12,6 @@ export function getUser() {
             user: null,
           });
         } else {
-          console.log(token);
           dispatch({
             type: GET_USER_SUCCESS,
             user: { email: token },
@@ -26,7 +25,6 @@ export function getUser() {
 export function loginUser() {
   return function (dispatch) {
     return AsyncStorage.setItem('token', 'test@test.tt').then((token) => {
-      console.log('LOGIN');
       dispatch({ type: GET_USER_SUCCESS, user: { email: token } });
     });
   };
@@ -35,7 +33,6 @@ export function loginUser() {
 export function logOutUser() {
   return function (dispatch) {
     return AsyncStorage.removeItem('token').then(() => {
-      console.log('LOGOUT');
       dispatch({ type: GET_USER_SUCCESS, user: null });
     });
   };
@@ -46,7 +43,10 @@ export function createUser(user) {
     return api.user
       .signUp(user)
       .then((response) =>
-        dispatch({ type: GET_USER_SUCCESS, user: { email: response.email } })
+        dispatch({
+          type: CREATE_USER_SUCCESS,
+          user: { email: response.email },
+        }),
       )
       .catch((err) => console.log(err));
   };

@@ -4,16 +4,21 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import { ROUTES } from '../constants/routes';
 import SignInScreen from '../screens/SignInScreen';
+import SignUpScreen from '../screens/SignUpScreen';
 
-const Screen = createStackNavigator();
+const Stack = createStackNavigator();
 
 export const LoginNavigation = () => (
   <NavigationContainer>
-    <Screen.Navigator>
-      <Screen.Screen
+    <Stack.Navigator>
+      <Stack.Screen
+        name={ROUTES.SIGN_UP}
+        component={SignUpScreen}
+      ></Stack.Screen>
+      <Stack.Screen
         name={ROUTES.SIGN_IN}
         component={SignInScreen}
-      ></Screen.Screen>
-    </Screen.Navigator>
+      ></Stack.Screen>
+    </Stack.Navigator>
   </NavigationContainer>
 );

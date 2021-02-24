@@ -3,4 +3,5 @@ export const ROUTES = {
   ASSETS_AND_LIABILITIES: 'Assets And Liabilities',
   GOALS: 'Goals',
   SIGN_IN: 'Sign In',
+  SIGN_UP: 'Sign Up',
 };

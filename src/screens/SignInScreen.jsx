@@ -1,24 +1,21 @@
 import React from 'react';
 import { View, StyleSheet, Text, Button } from 'react-native';
 import { connect } from 'react-redux';
+import AppTextButton from '../components/buttons/AppTextButton';
+import { AppText, AppTitleBold } from '../components/text';
 import { loginUser, createUser } from '../store/actions/user';
 
-const SignInScreen = ({ loginUser, createUser }) => {
+const SignInScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text>Sign In</Text>
-      <Button
-        title="Sign Up"
-        onPress={() => {
-          createUser({ email: 'testfromapi@test.tt', password: '123' });
-        }}
-      />
-      <Button
-        title="Login"
-        onPress={() => {
-          loginUser();
-        }}
-      />
+      <AppTitleBold>Log In</AppTitleBold>
+      <View style={styles.switch}>
+        <AppText>I'm new user. </AppText>
+        <AppTextButton
+          title="Create new account"
+          onPress={() => navigation.popToTop()}
+        />
+      </View>
     </View>
   );
 };
@@ -28,6 +25,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  switch: {
+    flexDirection: 'row',
   },
 });
 

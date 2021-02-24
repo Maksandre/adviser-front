@@ -3,7 +3,11 @@ import { StyleSheet } from 'react-native';
 import AppBaseText from './AppBaseText';
 
 export default AppText = (props) => {
-  return <AppBaseText style={styles.text}>{props.children}</AppBaseText>;
+  return (
+    <AppBaseText style={{ ...styles.text, ...props.style }}>
+      {props.children}
+    </AppBaseText>
+  );
 };
 
 const styles = StyleSheet.create({

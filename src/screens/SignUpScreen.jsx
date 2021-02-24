@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 30,
+    paddingVertical: '15%',
   },
   title: {
     marginBottom: 40,

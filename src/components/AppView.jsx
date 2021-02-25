@@ -10,8 +10,8 @@ const AppView = (props) => {
       contentContainerStyle={{ ...styles.container, ...props.style }}
       keyboardShouldPersistTaps="handled"
     >
-      {props.isLoaded && <Loader />}
       {props.children}
+      {props.isLoaded && <Loader />}
     </ScrollView>
   );
 };
@@ -19,8 +19,6 @@ const AppView = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     paddingHorizontal: 30,
     paddingVertical: '15%',
     backgroundColor: COLOR.WHITE,

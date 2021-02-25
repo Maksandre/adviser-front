@@ -1,10 +1,11 @@
 import React from 'react';
 import { Pressable, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 import { COLOR } from '../../constants/colors';
 import { OPACITY, RADIUS } from '../../constants/commonui';
 import { AppText } from '../text';
 
-export default AppButton = (props) => {
+const AppButton = (props) => {
   return (
     <Pressable
       style={({ pressed }) => [
@@ -13,6 +14,7 @@ export default AppButton = (props) => {
         props.style,
       ]}
       onPress={props.onPress}
+      disabled={props.isLoaded}
     >
       <AppText style={styles.text}>{props.title}</AppText>
     </Pressable>
@@ -33,3 +35,11 @@ const styles = StyleSheet.create({
     color: COLOR.WHITE,
   },
 });
+
+function mapStateToProps(state) {
+  return {
+    isLoaded: state.apiCallsInProgress === 0,
+  };
+}
+
+export default connect(mapStateToProps, null)(AppButton);

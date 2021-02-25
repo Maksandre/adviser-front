@@ -1,13 +1,16 @@
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
+import { connect } from 'react-redux';
 import { COLOR } from '../constants/colors';
+import Loader from './Loader';
 
-export default AppView = (props) => {
+const AppView = (props) => {
   return (
     <ScrollView
       contentContainerStyle={{ ...styles.container, ...props.style }}
       keyboardShouldPersistTaps="handled"
     >
+      {props.isLoaded && <Loader />}
       {props.children}
     </ScrollView>
   );
@@ -23,3 +26,11 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.WHITE,
   },
 });
+
+function mapStateToProps(state) {
+  return {
+    isLoaded: state.apiCallsInProgress === 0,
+  };
+}
+
+export default connect(mapStateToProps, null)(AppView);

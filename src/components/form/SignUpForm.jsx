@@ -4,9 +4,9 @@ import AppButton from '../buttons/AppButton';
 import AppInput from '../inputs/AppInput';
 import { AppBaseForm } from './AppBaseForm';
 
-export default SignUpForm = () => {
+export default SignUpForm = (props) => {
   return (
-    <AppBaseForm>
+    <AppBaseForm style={props.style}>
       <View style={styles.top}>
         <AppInput
           onChangeText={() => {}}

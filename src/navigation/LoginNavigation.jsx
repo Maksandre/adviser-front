@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
 
 export const LoginNavigation = () => (
   <NavigationContainer>
-    <Stack.Navigator>
+    <Stack.Navigator headerMode="none">
       <Stack.Screen
         name={ROUTES.SIGN_UP}
         component={SignUpScreen}

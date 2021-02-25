@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
+import AppView from '../components/AppView';
 import AppTextButton from '../components/buttons/AppTextButton';
 import SignUpForm from '../components/form/SignUpForm';
 import { AppText, AppTitleBold } from '../components/text';
@@ -7,7 +8,7 @@ import { ROUTES } from '../constants/routes';
 
 export default SignUpScreen = ({ navigation }) => {
   return (
-    <View style={styles.container}>
+    <AppView>
       <View style={styles.logoWrapper}>
         <Image style={styles.logo} source={require('../../assets/logo.png')} />
       </View>
@@ -22,18 +23,11 @@ export default SignUpScreen = ({ navigation }) => {
         </View>
       </View>
       <SignUpForm style={styles.form} />
-    </View>
+    </AppView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 30,
-    paddingVertical: '15%',
-  },
   title: {
     marginBottom: 30,
     flex: 1,

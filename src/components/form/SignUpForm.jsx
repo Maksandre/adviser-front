@@ -1,27 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { connect } from 'react-redux';
+
 import AppButton from '../buttons/AppButton';
 import AppInput from '../inputs/AppInput';
 import { AppBaseForm } from './AppBaseForm';
+import { createUser } from '../../store/actions/user';
 
-export default SignUpForm = (props) => {
+const SignUpForm = (props) => {
+  const [user, setUser] = useState({});
+
+  const handleEmailInput = (text) => {
+    setUser((usr) => ({ ...usr, email: text }));
+  };
+
+  const handlePasswordInput = (text) => {
+    setUser((usr) => ({ ...usr, password: text }));
+  };
+
+  const handleSubmitForm = () => {
+    props.createUser(user);
+  };
+
   return (
     <AppBaseForm style={props.style}>
       <View style={styles.top}>
         <AppInput
-          onChangeText={() => {}}
+          onChangeText={handleEmailInput}
           placeholder="Email"
           autoCompleteType="email"
         />
         <AppInput
-          onChangeText={() => {}}
+          onChangeText={handlePasswordInput}
           placeholder="Password"
           autoCompleteType="password"
           secureTextEntry={true}
         />
       </View>
       <View style={styles.bottom}>
-        <AppButton title="Create account" />
+        <AppButton title="Create account" onPress={handleSubmitForm} />
       </View>
     </AppBaseForm>
   );
@@ -37,3 +54,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
 });
+
+const mapDispatchToProps = {
+  createUser,
+};
+
+export default connect(null, mapDispatchToProps)(SignUpForm);

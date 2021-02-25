@@ -12,6 +12,7 @@ export default AppButton = (props) => {
         pressed && styles.containerPressed,
         props.style,
       ]}
+      onPress={props.onPress}
     >
       <AppText style={styles.text}>{props.title}</AppText>
     </Pressable>

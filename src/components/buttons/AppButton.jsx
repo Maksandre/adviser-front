@@ -10,6 +10,7 @@ export default AppButton = (props) => {
       style={({ pressed }) => [
         styles.container,
         pressed && styles.containerPressed,
+        props.style,
       ]}
     >
       <AppText style={styles.text}>{props.title}</AppText>

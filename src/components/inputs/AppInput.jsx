@@ -36,11 +36,14 @@ export default AppInput = ({
 
 const styles = StyleSheet.create({
   input: {
-    paddingVertical: 25,
+    paddingTop: 30,
+    paddingBottom: 10,
     borderBottomColor: COLOR.GRAY,
     borderBottomWidth: 1,
+    fontSize: 16,
   },
   focusedInput: {
     borderBottomColor: COLOR.BLACK,
+    borderBottomWidth: 2,
   },
 });

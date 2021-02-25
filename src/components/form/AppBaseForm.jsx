@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { COLOR } from '../../constants/colors';
 
 export const AppBaseForm = (props) => {
   return (
@@ -12,6 +11,7 @@ export const AppBaseForm = (props) => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     width: '100%',
   },
 });

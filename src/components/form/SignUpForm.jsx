@@ -6,7 +6,7 @@ import { AppBaseForm } from './AppBaseForm';
 
 export default SignUpForm = () => {
   return (
-    <AppBaseForm style={styles.container}>
+    <AppBaseForm>
       <View style={styles.top}>
         <AppInput
           onChangeText={() => {}}
@@ -28,11 +28,9 @@ export default SignUpForm = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   top: {
     flex: 1,
+    marginBottom: 30,
   },
   bottom: {
     flex: 1,

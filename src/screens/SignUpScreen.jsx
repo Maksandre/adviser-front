@@ -9,7 +9,7 @@ export default SignUpScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.title}>
-        <AppTitleBold>Create Account</AppTitleBold>
+        <AppTitleBold>Create account</AppTitleBold>
         <View style={styles.switch}>
           <AppText>I already have an account. </AppText>
           <AppTextButton

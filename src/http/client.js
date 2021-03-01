@@ -9,9 +9,10 @@ const post = async (route, body) => {
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(body),
     });
-    return handleResponse(response);
+    return response;
   } catch (error) {
-    return handleError(error);
+    console.log(`post ${route} failed`);
+    throw Error(error);
   }
 };
 

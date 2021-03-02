@@ -9,6 +9,5 @@ export function beginApiCall() {
 export function apiCallFailed(error) {
   return {
     type: API_CALL_FAIL,
-    // TODO handle error
   };
 }

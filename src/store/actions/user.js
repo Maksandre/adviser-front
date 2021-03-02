@@ -44,15 +44,15 @@ export function createUser(user) {
     dispatch(beginApiCall());
     return api.user
       .signUp(user)
-      .then((response) =>
+      .then((response) => {
         dispatch({
           type: CREATE_USER_SUCCESS,
           user: { email: response.email },
-        }),
-      )
+        });
+      })
       .catch((err) => {
         dispatch(apiCallFailed());
-        console.log(err);
+        // TODO set error
       });
   };
 }

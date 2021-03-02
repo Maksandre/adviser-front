@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import AppButton from '../buttons/AppButton';
 import AppInput from '../inputs/AppInput';
 import { AppBaseForm } from './AppBaseForm';
-import { createUser } from '../../store/actions/user';
+import { createUser, loginUser } from '../../store/actions/user';
 
 const SignUpForm = (props) => {
   const [user, setUser] = useState({});
@@ -18,8 +18,10 @@ const SignUpForm = (props) => {
     setUser((usr) => ({ ...usr, password: text }));
   };
 
-  const handleSubmitForm = () => {
-    props.createUser(user);
+  const handleSubmitForm = async () => {
+    if (await props.createUser(user)) {
+      await props.loginUser(user);
+    }
   };
 
   return (
@@ -57,6 +59,7 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = {
   createUser,
+  loginUser,
 };
 
 export default connect(null, mapDispatchToProps)(SignUpForm);

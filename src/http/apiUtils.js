@@ -1,6 +1,8 @@
 export async function handleResponse(response) {
-  if (response.ok) return response.json();
-  else if (response.status >= 400 && response.status < 500) {
+  if (response.ok) {
+    if (response.status === 204) return response;
+    return response.json();
+  } else if (response.status >= 400 && response.status < 500) {
     const error = await response.text();
     throw new Error(error);
   } else {

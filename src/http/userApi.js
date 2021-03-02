@@ -10,4 +10,13 @@ const signUp = async (user) => {
   }
 };
 
-export { signUp };
+const signIn = async (user) => {
+  try {
+    const response = await client.post('/signin', user);
+    return await handleResponse(response);
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export { signUp, signIn };

@@ -11,7 +11,7 @@ const AppView = (props) => {
       keyboardShouldPersistTaps="handled"
     >
       {props.children}
-      {props.isLoaded && <Loader />}
+      {!props.isLoaded && <Loader />}
     </ScrollView>
   );
 };

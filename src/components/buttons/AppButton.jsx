@@ -14,7 +14,7 @@ const AppButton = (props) => {
         props.style,
       ]}
       onPress={props.onPress}
-      disabled={props.isLoaded}
+      disabled={!props.isLoaded}
     >
       <AppText style={styles.text}>{props.title}</AppText>
     </Pressable>

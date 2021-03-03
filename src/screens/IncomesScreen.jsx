@@ -1,11 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
+import AppView from '../components/AppView';
 
 const IncomesScreen = () => {
   return (
-    <View style={styles.container}>
+    <AppView style={styles.container}>
       <Text>Incomes Screen</Text>
-    </View>
+    </AppView>
   );
 };
 

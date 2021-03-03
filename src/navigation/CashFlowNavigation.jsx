@@ -3,12 +3,13 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 
 import ExpensesScreen from '../screens/ExpensesScreen';
 import IncomesScreen from '../screens/IncomesScreen';
+import AppTabBar from '../components/AppTabBar';
 
 const Tab = createMaterialTopTabNavigator();
 
 function CashFlowNavigation() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator tabBar={AppTabBar}>
       <Tab.Screen name="Expenses" component={ExpensesScreen} />
       <Tab.Screen name="Incomes" component={IncomesScreen} />
     </Tab.Navigator>

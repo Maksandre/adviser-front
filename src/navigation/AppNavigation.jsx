@@ -3,10 +3,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import MainScreen from '../screens/MainScreen';
 import { GoalScreen } from '../screens/GoalScreen';
 import { ROUTES } from '../constants/routes';
 import CashFlowNavigation from './CashFlowNavigation';
+import AssetsNavigation from './AssetNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,7 +32,7 @@ export const AppNavigation = () => (
     >
       <Tab.Screen
         name={ROUTES.ASSETS_AND_LIABILITIES}
-        component={MainScreen}
+        component={AssetsNavigation}
       ></Tab.Screen>
       <Tab.Screen
         name={ROUTES.CASH_FLOW}

@@ -7,6 +7,7 @@ import { CashFlowScreen } from '../screens/CashFlowScreen';
 import MainScreen from '../screens/MainScreen';
 import { GoalScreen } from '../screens/GoalScreen';
 import { ROUTES } from '../constants/routes';
+import CashFlowNavigation from './CashFlowNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -36,7 +37,7 @@ export const AppNavigation = () => (
       ></Tab.Screen>
       <Tab.Screen
         name={ROUTES.CASH_FLOW}
-        component={CashFlowScreen}
+        component={CashFlowNavigation}
       ></Tab.Screen>
       <Tab.Screen name={ROUTES.GOALS} component={GoalScreen}></Tab.Screen>
     </Tab.Navigator>

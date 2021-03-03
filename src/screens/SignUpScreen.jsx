@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import AppView from '../components/AppView';
 import AppTextButton from '../components/buttons/AppTextButton';
-import SignInForm from '../components/form/SignInForm';
+import SignUpForm from '../components/form/SignUpForm';
 import { AppText, AppTitleBold } from '../components/text';
 import { ROUTES } from '../constants/routes';
 
@@ -13,16 +13,16 @@ export default SignUpScreen = ({ navigation }) => {
         <Image style={styles.logo} source={require('../../assets/logo.png')} />
       </View>
       <View style={styles.title}>
-        <AppTitleBold>Log In</AppTitleBold>
+        <AppTitleBold>Create account</AppTitleBold>
         <View style={styles.switch}>
-          <AppText>I'm new user. </AppText>
+          <AppText>I already have an account. </AppText>
           <AppTextButton
-            title="Register"
-            onPress={() => navigation.navigate(ROUTES.SIGN_UP)}
+            title="Log in here"
+            onPress={() => navigation.navigate(ROUTES.SIGN_IN)}
           />
         </View>
       </View>
-      <SignInForm style={styles.form} />
+      <SignUpForm style={styles.form} />
     </AppView>
   );
 };

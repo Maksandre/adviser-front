@@ -1,4 +1,3 @@
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
 export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS';
-
-export const userInitialState = null;
+export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';

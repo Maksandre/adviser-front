@@ -4,70 +4,80 @@ import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { AppText } from './text';
 import { COLOR } from '../constants/colors';
 import { BOLD, RADIUS } from '../constants/commonui';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import AppSectionTitle from './text/AppSectionTitle';
 
-function AppTabBar({ state, descriptors, navigation, position }) {
+function AppTabBar({ state, descriptors, navigation, title }) {
   return (
-    <View style={styles.bar}>
-      {state.routes.map((route, index) => {
-        const { options } = descriptors[route.key];
-        const label =
-          options.tabBarLabel !== undefined
-            ? options.tabBarLabel
-            : options.title !== undefined
-            ? options.title
-            : route.name;
+    <SafeAreaView style={{ backgroundColor: COLOR.WHITE }}>
+      <AppSectionTitle style={styles.title}>{title}</AppSectionTitle>
 
-        const isFocused = state.index === index;
+      <View style={styles.bar}>
+        {state.routes.map((route, index) => {
+          const { options } = descriptors[route.key];
+          const label =
+            options.tabBarLabel !== undefined
+              ? options.tabBarLabel
+              : options.title !== undefined
+              ? options.title
+              : route.name;
 
-        const onPress = () => {
-          const event = navigation.emit({
-            type: 'tabPress',
-            target: route.key,
-            canPreventDefault: true,
-          });
+          const isFocused = state.index === index;
 
-          if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(route.name);
-          }
-        };
+          const onPress = () => {
+            const event = navigation.emit({
+              type: 'tabPress',
+              target: route.key,
+              canPreventDefault: true,
+            });
 
-        const onLongPress = () => {
-          navigation.emit({
-            type: 'tabLongPress',
-            target: route.key,
-          });
-        };
-
-        return (
-          <TouchableOpacity
-            accessibilityRole="button"
-            accessibilityState={isFocused ? { selected: true } : {}}
-            accessibilityLabel={options.tabBarAccessibilityLabel}
-            key={route.name}
-            onPress={onPress}
-            onLongPress={onLongPress}
-            style={
-              isFocused
-                ? { ...styles.opacity, ...styles.selectedOpacity }
-                : styles.opacity
+            if (!isFocused && !event.defaultPrevented) {
+              navigation.navigate(route.name);
             }
-          >
-            <AppText style={isFocused ? styles.selectedText : styles.text}>
-              {label}
-            </AppText>
-          </TouchableOpacity>
-        );
-      })}
-    </View>
+          };
+
+          const onLongPress = () => {
+            navigation.emit({
+              type: 'tabLongPress',
+              target: route.key,
+            });
+          };
+
+          return (
+            <TouchableOpacity
+              accessibilityRole="button"
+              accessibilityState={isFocused ? { selected: true } : {}}
+              accessibilityLabel={options.tabBarAccessibilityLabel}
+              key={route.name}
+              onPress={onPress}
+              onLongPress={onLongPress}
+              style={
+                isFocused
+                  ? { ...styles.opacity, ...styles.selectedOpacity }
+                  : styles.opacity
+              }
+            >
+              <AppText style={isFocused ? styles.selectedText : styles.text}>
+                {label}
+              </AppText>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  title: {
+    paddingLeft: 30,
+    paddingVertical: 20,
+  },
   bar: {
     flexDirection: 'row',
-    paddingTop: 60,
     justifyContent: 'flex-end',
     backgroundColor: COLOR.WHITE,
+    paddingTop: 10,
   },
   opacity: {
     alignItems: 'center',

@@ -9,7 +9,7 @@ const Tab = createMaterialTopTabNavigator();
 
 function CashFlowNavigation() {
   return (
-    <Tab.Navigator tabBar={AppTabBar}>
+    <Tab.Navigator tabBar={AppTabBar} tabBarOptions={{ title: 'Cash Flow' }}>
       <Tab.Screen name="Expenses" component={ExpensesScreen} />
       <Tab.Screen name="Incomes" component={IncomesScreen} />
     </Tab.Navigator>

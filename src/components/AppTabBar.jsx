@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     backgroundColor: COLOR.WHITE,
     paddingTop: 10,
+    paddingHorizontal: 30,
   },
   opacity: {
     alignItems: 'center',
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
     borderRadius: RADIUS,
     paddingVertical: 15,
     paddingHorizontal: 10,
-    marginRight: 30,
+    marginLeft: 10,
   },
   selectedOpacity: {
     backgroundColor: COLOR.PURE_WHITE,

@@ -4,19 +4,26 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import AppTabBar from '../components/AppTabBar';
 import AssetsScreen from '../screens/AssetsScreen';
 import LiabilitiesScreen from '../screens/LiabilitiesScreen';
+import ALSummaryScreen from '../screens/ALSummaryScreen';
+import { ROUTES } from '../constants/routes';
 
 const Tab = createMaterialTopTabNavigator();
 
-function AssetsNavigation() {
+function ALNavigation() {
   return (
     <Tab.Navigator
       tabBar={AppTabBar}
       tabBarOptions={{ title: 'Assets and Liabilities' }}
     >
-      <Tab.Screen name="Assets" component={AssetsScreen} />
-      <Tab.Screen name="Liabilities" component={LiabilitiesScreen} />
+      <Tab.Screen
+        name={ROUTES.ASSETS_AND_LIABILITIES_SUMMARY}
+        component={ALSummaryScreen}
+        options={{ tabBarLabel: 'Summary' }}
+      />
+      <Tab.Screen name={ROUTES.ASSETS} component={AssetsScreen} />
+      <Tab.Screen name={ROUTES.LIABILITIES} component={LiabilitiesScreen} />
     </Tab.Navigator>
   );
 }
 
-export default AssetsNavigation;
+export default ALNavigation;

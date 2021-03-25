@@ -4,20 +4,17 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import AppTabBar from '../components/AppTabBar';
 import AssetsScreen from '../screens/AssetsScreen';
 import LiabilitiesScreen from '../screens/LiabilitiesScreen';
-import ALSummaryScreen from '../screens/ALSummaryScreen';
+import WealthSummaryScreen from '../screens/WealthSummaryScreen';
 import { ROUTES } from '../constants/routes';
 
 const Tab = createMaterialTopTabNavigator();
 
-function ALNavigation() {
+function WealthNavigation() {
   return (
-    <Tab.Navigator
-      tabBar={AppTabBar}
-      tabBarOptions={{ title: 'Assets and Liabilities' }}
-    >
+    <Tab.Navigator tabBar={AppTabBar} tabBarOptions={{ title: 'Wealth' }}>
       <Tab.Screen
-        name={ROUTES.ASSETS_AND_LIABILITIES_SUMMARY}
-        component={ALSummaryScreen}
+        name={ROUTES.WEALTH_SUMMARY}
+        component={WealthSummaryScreen}
         options={{ tabBarLabel: 'Summary' }}
       />
       <Tab.Screen name={ROUTES.ASSETS} component={AssetsScreen} />
@@ -26,4 +23,4 @@ function ALNavigation() {
   );
 }
 
-export default ALNavigation;
+export default WealthNavigation;

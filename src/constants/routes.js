@@ -1,11 +1,17 @@
 export const ROUTES = {
   // Bottom tab sections
-  ASSETS_AND_LIABILITIES_SECTION: 'Assets And Liabilities',
+  WEALTH_SECTION: 'Wealth',
   CASH_FLOW_SECTION: 'Cash-Flow',
   GOALS_SECTION: 'Goals',
+  SETTINGS_SECTION: 'Settings',
 
-  // Assets Liabilities screens
-  ASSETS_AND_LIABILITIES_SUMMARY: 'AL Summary',
+  // Account Screens
+  PROFILE: 'PROFILE',
+  YIELDS: 'YIELDS',
+  INFLATION: 'INFLATION',
+
+  // Wealth screens
+  WEALTH_SUMMARY: 'Wealth Summary',
   ASSETS: 'Assets',
   LIABILITIES: 'Liabilities',
 

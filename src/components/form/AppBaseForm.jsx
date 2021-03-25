@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const AppBaseForm = (props) => {
   return (
-    <View style={{ ...styles.container, ...props.style }}>
+    <SafeAreaView style={{ ...styles.container, ...props.style }}>
       {props.children}
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -13,5 +14,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
+    paddingVertical: 20,
   },
 });

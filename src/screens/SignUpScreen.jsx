@@ -9,17 +9,22 @@ import { ROUTES } from '../constants/routes';
 export default SignUpScreen = ({ navigation }) => {
   return (
     <AppView>
-      <View style={styles.logoWrapper}>
-        <Image style={styles.logo} source={require('../../assets/logo.png')} />
-      </View>
-      <View style={styles.title}>
-        <AppTitleBold>Create account</AppTitleBold>
-        <View style={styles.switch}>
-          <AppText>I already have an account. </AppText>
-          <AppTextButton
-            title="Log in here"
-            onPress={() => navigation.navigate(ROUTES.SIGN_IN)}
+      <View style={styles.intro}>
+        <View style={styles.logoWrapper}>
+          <Image
+            style={styles.logo}
+            source={require('../../assets/logo.png')}
           />
+        </View>
+        <View style={styles.title}>
+          <AppTitleBold>Create account</AppTitleBold>
+          <View style={styles.switch}>
+            <AppText>I already have an account. </AppText>
+            <AppTextButton
+              title="Log in here"
+              onPress={() => navigation.navigate(ROUTES.SIGN_IN)}
+            />
+          </View>
         </View>
       </View>
       <SignUpForm style={styles.form} />
@@ -28,10 +33,15 @@ export default SignUpScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+  },
+  intro: {
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    flex: 3,
+  },
   title: {
-    marginBottom: 30,
-    flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
   },
   switch: {
@@ -42,11 +52,7 @@ const styles = StyleSheet.create({
     height: 80,
     resizeMode: 'contain',
   },
-  logoWrapper: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+  logoWrapper: {},
   form: {
     flex: 4,
   },

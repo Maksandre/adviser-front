@@ -1,11 +1,12 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
+
 import AppView from '../components/AppView';
 
-const ALSummaryScreen = () => {
+const ProfileScreen = () => {
   return (
     <AppView style={styles.container}>
-      <Text>Assets Liabilities Summary</Text>
+      <Text>Profile</Text>
     </AppView>
   );
 };
@@ -18,4 +19,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ALSummaryScreen;
+export default ProfileScreen;

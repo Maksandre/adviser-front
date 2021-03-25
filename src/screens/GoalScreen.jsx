@@ -1,18 +1,21 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import { StyleSheet } from 'react-native';
 
-export const GoalScreen = () => {
+import AppView from '../components/AppView';
+import AppSectionTitle from '../components/text/AppSectionTitle';
+
+const GoalScreen = () => {
   return (
-    <View style={styles.container}>
-      <Text>Goal Screen</Text>
-    </View>
-  )
+    <AppView style={styles.container}>
+      <AppSectionTitle>Goals</AppSectionTitle>
+    </AppView>
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
+  },
 });
+
+export default GoalScreen;

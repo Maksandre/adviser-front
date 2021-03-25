@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     backgroundColor: COLOR.BLACK,
-    opacity: 0.7,
+    opacity: 0.5,
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
   },

@@ -6,32 +6,43 @@ import SignInForm from '../components/form/SignInForm';
 import { AppText, AppTitleBold } from '../components/text';
 import { ROUTES } from '../constants/routes';
 
-export default SignUpScreen = ({ navigation }) => {
+export default SignInScreen = ({ navigation }) => {
   return (
-    <AppView>
-      <View style={styles.logoWrapper}>
-        <Image style={styles.logo} source={require('../../assets/logo.png')} />
-      </View>
-      <View style={styles.title}>
-        <AppTitleBold>Log In</AppTitleBold>
-        <View style={styles.switch}>
-          <AppText>I'm new user. </AppText>
-          <AppTextButton
-            title="Register"
-            onPress={() => navigation.navigate(ROUTES.SIGN_UP)}
+    <AppView style={styles.container}>
+      <View style={styles.intro}>
+        <View style={styles.logoWrapper}>
+          <Image
+            style={styles.logo}
+            source={require('../../assets/logo.png')}
           />
         </View>
+        <View style={styles.title}>
+          <AppTitleBold>Log In</AppTitleBold>
+          <View style={styles.switch}>
+            <AppText>I'm new user. </AppText>
+            <AppTextButton
+              title="Register"
+              onPress={() => navigation.navigate(ROUTES.SIGN_UP)}
+            />
+          </View>
+        </View>
       </View>
+
       <SignInForm style={styles.form} />
     </AppView>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+  },
+  intro: {
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    flex: 3,
+  },
   title: {
-    marginBottom: 30,
-    flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
   },
   switch: {
@@ -42,11 +53,7 @@ const styles = StyleSheet.create({
     height: 80,
     resizeMode: 'contain',
   },
-  logoWrapper: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+  logoWrapper: {},
   form: {
     flex: 4,
   },

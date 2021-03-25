@@ -19,9 +19,8 @@ const AppView = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 30,
-    paddingVertical: '15%',
     backgroundColor: COLOR.WHITE,
+    paddingHorizontal: 30,
   },
 });
 

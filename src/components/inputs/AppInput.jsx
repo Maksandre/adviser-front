@@ -30,6 +30,7 @@ export default AppInput = ({
       secureTextEntry={rest.secureTextEntry}
       onFocus={onFocus}
       onBlur={onBlur}
+      keyboardType={rest.keyboardType}
     />
   );
 };

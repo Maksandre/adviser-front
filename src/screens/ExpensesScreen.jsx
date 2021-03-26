@@ -18,7 +18,7 @@ const ExpensesScreen = ({
   deleteIncome,
 }) => {
   useEffect(() => {
-    getIncomes();
+    getIncomes().then(console.log(incomes));
   }, []);
 
   return (

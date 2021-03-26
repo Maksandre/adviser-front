@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, LogBox, StyleSheet, View } from 'react-native';
+import { LogBox, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
-import { removeItemAlert } from '../components/alerts/RemoveItemAlert';
+import { removeItemAlert } from '../components/alerts/removeItemAlert';
 import AppView from '../components/AppView';
 import AppCreateButton from '../components/buttons/AppCreateButton';
 import EconomyList from '../components/lists/economy/EconomyList';

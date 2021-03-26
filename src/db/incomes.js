@@ -22,9 +22,9 @@ export const incomes = {
       UPDATE incomes
       SET name = ?,
           amount = ?,
-          position = ? 
-          date_begin = ? 
-          date_end = ? 
+          position = ?,
+          date_begin = ?, 
+          date_end = ?,
       WHERE id = ?`,
       [
         income.name,

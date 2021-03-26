@@ -1,17 +1,29 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text } from 'react-native';
+import { connect } from 'react-redux';
 
 import AppView from '../components/AppView';
-import DB from '../db';
+import {
+  getIncomes,
+  createIncome,
+  updateIncome,
+  deleteIncome,
+} from '../store/actions/income';
 
-const ExpensesScreen = () => {
+const ExpensesScreen = ({
+  incomes,
+  getIncomes,
+  createIncome,
+  updateIncome,
+  deleteIncome,
+}) => {
   useEffect(() => {
-    DB.incomes.getIncomes().then((res) => console.log(res));
-  });
+    getIncomes();
+  }, []);
 
   return (
     <AppView style={styles.container}>
-      <Text>Expenses Screen</Text>
+      <Text>{incomes[0].name}</Text>
     </AppView>
   );
 };
@@ -24,4 +36,17 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ExpensesScreen;
+function mapStateToProps(state) {
+  return {
+    incomes: state.incomes,
+  };
+}
+
+const mapDispatchToProps = {
+  getIncomes,
+  createIncome,
+  updateIncome,
+  deleteIncome,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExpensesScreen);

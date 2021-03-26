@@ -26,5 +26,7 @@ export const incomesReducer = (state = initialState, action) => {
     case CREATE_INCOME_SUCCESS: {
       return [action.value, ...state.yields];
     }
+    default:
+      return state;
   }
 };

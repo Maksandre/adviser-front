@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text } from 'react-native';
 
 import AppView from '../components/AppView';
+import DB from '../db';
 
 const ExpensesScreen = () => {
+  useEffect(() => {
+    DB.incomes.getIncomes().then((res) => console.log(res));
+  });
+
   return (
     <AppView style={styles.container}>
       <Text>Expenses Screen</Text>

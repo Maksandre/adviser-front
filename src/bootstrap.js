@@ -3,9 +3,13 @@ import DB from './db';
 export async function bootstrap() {
   try {
     await DB.init();
-    // await DB.economy.createYield({ name: 'bonds', rate: 3.3, position: 0 });
-    // await DB.economy.createYield({ name: 'shares', rate: 7.4, position: 1 });
-    // await DB.economy.createYield({ name: 'deposits', rate: 2.1, position: 2 });
+    // await DB.incomes.createIncome({
+    //   name: 'Salary',
+    //   amount: '20000',
+    //   position: 0,
+    //   dateBegin: '1980-02-22 13:19:01.00000',
+    //   dateEnd: '1985-02-22 13:19:01.00000',
+    // });
     console.log('DB started...');
   } catch (error) {
     console.error(error);

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Alert, LogBox, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
+import { removeItemAlert } from '../components/alerts/RemoveItemAlert';
 import AppView from '../components/AppView';
 import AppCreateButton from '../components/buttons/AppCreateButton';
 import EconomyList from '../components/lists/economy/EconomyList';
@@ -53,17 +54,10 @@ const InflationScreen = ({
   };
 
   const handleDelete = () => {
-    Alert.alert('Attention!', `You want to delete «${selectedItem.name}»?`, [
-      { text: 'Cancel', style: 'cancel' },
-      {
-        text: 'Delete',
-        style: 'destructive',
-        onPress: () => {
-          deleteInflationRate(selectedItem.id);
-          handleClose();
-        },
-      },
-    ]);
+    removeItemAlert(selectedItem, () => {
+      deleteInflationRate(selectedItem.id);
+      handleClose();
+    });
   };
 
   const handleItemPress = (item) => {

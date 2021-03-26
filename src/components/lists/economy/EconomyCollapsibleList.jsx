@@ -1,18 +1,12 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import AppGhostButton from '../../buttons/AppGhostButton';
-
 import AppDraggableList from '../AppDraggableList';
-import EconomyListItem from './EconomyListItem';
+import EconomyCollapsibleListItem from './EconomyCollapsibleListItem';
 
-const EconomyList = ({ data, onPress, onDragEnd, onAddPress }) => {
+const EconomyCollapsibleList = ({ data, onDragEnd, onAddPress }) => {
   const renderItem = ({ item, drag, isActive }) => (
-    <EconomyListItem
-      item={item}
-      drag={drag}
-      isActive={isActive}
-      onPress={() => onPress(item)}
-    />
+    <EconomyCollapsibleListItem item={item} drag={drag} isActive={isActive} />
   );
 
   return (
@@ -33,4 +27,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EconomyList;
+export default EconomyCollapsibleList;

@@ -6,7 +6,7 @@ import { BOLD, RADIUS } from '../../../constants/commonui';
 import { SHADOW } from '../../../constants/styles';
 import { AppText } from '../../text';
 
-const EconomyListItem = ({ item, index, drag, isActive, onPress }) => {
+const EconomyListItem = ({ item, drag, isActive, onPress }) => {
   const style = isActive
     ? { ...styles.opacity, ...styles.opacityActive }
     : styles.opacity;

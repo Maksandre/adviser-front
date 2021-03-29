@@ -8,7 +8,7 @@ import AppCollapsibleListItem from '../AppCollapsibleListItem';
 import AppEditButton from '../../buttons/AppEditButton';
 import EconomyVisible from './EconomyVisible';
 
-const ValuableListItem = ({ item, onLongPress, isActive }) => {
+const ValuableListItem = ({ item, onPressEdit, onLongPress, isActive }) => {
   const opacityStyle = isActive
     ? { ...styles.opacity, ...styles.opacityActive }
     : styles.opacity;
@@ -24,7 +24,7 @@ const ValuableListItem = ({ item, onLongPress, isActive }) => {
         <EconomyVisible left="Date begin" right={item.dateBegin} />
         <EconomyVisible left="Date end" right={item.dateBegin} />
         <View style={styles.button}>
-          <AppEditButton onPress={() => console.log('CLICK')} />
+          <AppEditButton onPress={onPressEdit} />
         </View>
       </View>
     </AppCollapsibleListItem>

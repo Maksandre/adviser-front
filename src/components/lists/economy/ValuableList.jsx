@@ -6,7 +6,12 @@ import ValuableListItem from './ValuableListItem';
 
 const ValuableList = ({ data, onDragEnd, onAddPress }) => {
   const renderItem = ({ item, drag, isActive }) => (
-    <ValuableListItem item={item} onLongPress={drag} isActive={isActive} />
+    <ValuableListItem
+      item={item}
+      onPressEdit={onAddPress}
+      onLongPress={drag}
+      isActive={isActive}
+    />
   );
 
   return (

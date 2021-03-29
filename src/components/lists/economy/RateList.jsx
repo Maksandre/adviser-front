@@ -3,13 +3,13 @@ import { StyleSheet } from 'react-native';
 import AppGhostButton from '../../buttons/AppGhostButton';
 
 import AppDraggableList from '../AppDraggableList';
-import EconomyListItem from './EconomyListItem';
+import RateListItem from './RateListItem';
 
-const EconomyList = ({ data, onPress, onDragEnd, onAddPress }) => {
+const RateList = ({ data, onPress, onDragEnd, onAddPress }) => {
   const renderItem = ({ item, drag, isActive }) => (
-    <EconomyListItem
+    <RateListItem
       item={item}
-      drag={drag}
+      onLongPress={drag}
       isActive={isActive}
       onPress={() => onPress(item)}
     />
@@ -33,4 +33,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EconomyList;
+export default RateList;

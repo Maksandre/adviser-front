@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { removeItemAlert } from '../components/alerts/removeItemAlert';
 import AppView from '../components/AppView';
 import AppCreateButton from '../components/buttons/AppCreateButton';
-import EconomyList from '../components/lists/economy/EconomyList';
+import RateList from '../components/lists/economy/RateList';
 import RateModal from '../components/modal/RateModal';
 import { AppSubtitle } from '../components/text';
 import {
@@ -89,7 +89,7 @@ const YieldsScreen = ({
         <AppSubtitle>Yield rates</AppSubtitle>
         <AppCreateButton onPress={() => handleItemPress(itemInitialState)} />
       </View>
-      <EconomyList
+      <RateList
         data={yields.sort((a, b) => b.position - a.position)}
         onPress={handleItemPress}
         onDragEnd={handleDragEnd}

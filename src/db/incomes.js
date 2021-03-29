@@ -9,7 +9,7 @@ export const incomes = {
   createIncome: ({ name, amount, position, dateBegin, dateEnd }) =>
     query(
       `
-      INSERT INTO incomes (name, amount, position, date_begin, date_end)
+      INSERT INTO incomes (name, amount, position, dateBegin, dateEnd)
       VALUES (?, ?, ?, ?, ?)
       `,
       [name, amount, position, dateBegin, dateEnd],
@@ -23,8 +23,8 @@ export const incomes = {
       SET name = ?,
           amount = ?,
           position = ?,
-          date_begin = ?, 
-          date_end = ?,
+          dateBegin = ?, 
+          dateEnd = ?
       WHERE id = ?`,
       [
         income.name,

@@ -38,6 +38,7 @@ const IncomesScreen = ({
 
   const handleClose = () => {
     setModalVisisble(false);
+    setSelectedItem(itemInitialState);
   };
 
   const handleDragEnd = (data) => {
@@ -48,13 +49,18 @@ const IncomesScreen = ({
     if (selectedItem.id) {
       updateIncome(selectedItem);
     } else {
-      // TODO
+      createIncome({
+        ...selectedItem,
+        position:
+          incomes.length > 0
+            ? incomes.sort((a, b) => b.position - a.position)[0].position + 1
+            : 0,
+      });
     }
     handleClose();
   };
 
   const handleEditClick = (item) => {
-    console.log('ITEM', item);
     setSelectedItem(item);
     setModalVisisble(true);
   };
@@ -82,6 +88,13 @@ const IncomesScreen = ({
         onAmountChange={(text) =>
           setSelectedItem({ ...selectedItem, amount: text })
         }
+        onDateBeginChange={(text) => {
+          console.log(text);
+          setSelectedItem({ ...selectedItem, dateBegin: text });
+        }}
+        onDateEndChange={(text) => {
+          setSelectedItem({ ...selectedItem, dateEnd: text });
+        }}
         onSubmit={handleSubmit}
         onDelete={handleDelete}
         onClose={handleClose}

@@ -24,7 +24,7 @@ export const incomesReducer = (state = initialState, action) => {
       return state.filter((income) => income.id !== action.value);
     }
     case CREATE_INCOME_SUCCESS: {
-      return [action.value, ...state.yields];
+      return [action.value, ...state];
     }
     default:
       return state;

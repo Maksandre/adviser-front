@@ -1,19 +1,22 @@
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 
+import { COLOR } from '../../constants/colors';
 import { BOLD } from '../../constants/commonui';
 import AppHiddenInput from '../inputs/AppHiddenInput';
-import { AppBaseForm } from './AppBaseForm';
-import { COLOR } from '../../constants/colors';
+import DateRequisite from '../inputs/DateRequisite';
+import TextRequisite from '../inputs/TextRequisite';
 import { AppText } from '../text';
-import AppRequisite from '../inputs/AppRequisite';
+import { AppBaseForm } from './AppBaseForm';
 
 const IncomeForm = ({
   item,
   subtitle,
   onTitleChange,
   onAmountChange,
+  onDateBeginChange,
+  onDateEndChange,
   onDelete,
   isNew,
 }) => {
@@ -39,12 +42,24 @@ const IncomeForm = ({
         )}
       </View>
       {!isNew && <AppText style={styles.subtitle}>{subtitle}</AppText>}
-      <AppRequisite
+      <TextRequisite
         value={item.amount.toString()}
         name="Amount"
         placeholder="Empty"
         onChangeText={onAmountChange}
         measure=" $"
+      />
+      <DateRequisite
+        name="Date begin"
+        placeholder="Empty"
+        value={item.dateBegin}
+        onChangeText={onDateBeginChange}
+      />
+      <DateRequisite
+        name="Date end"
+        placeholder="Empty"
+        value={item.dateEnd}
+        onChangeText={onDateEndChange}
       />
     </AppBaseForm>
   );

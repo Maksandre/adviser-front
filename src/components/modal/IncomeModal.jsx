@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+
 import IncomeForm from '../form/IncomeForm';
 import AppModal from './AppModal';
 
@@ -7,6 +7,8 @@ const IncomeModal = ({
   item,
   onTitleChange,
   onAmountChange,
+  onDateBeginChange,
+  onDateEndChange,
   onSubmit,
   onDelete,
   isVisible,
@@ -25,6 +27,8 @@ const IncomeModal = ({
         subtitle={'Monthly income'}
         onTitleChange={onTitleChange}
         onAmountChange={onAmountChange}
+        onDateBeginChange={onDateBeginChange}
+        onDateEndChange={onDateEndChange}
         onDelete={onDelete}
         isNew={item.id ? false : true}
       />

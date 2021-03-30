@@ -1,13 +1,13 @@
-import React from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
+import { COLOR } from '../../constants/colors';
 import { BOLD } from '../../constants/commonui';
 import AppHiddenInput from '../inputs/AppHiddenInput';
-import AppRequisite from '../inputs/AppRequisite';
-import { AppBaseForm } from './AppBaseForm';
-import { COLOR } from '../../constants/colors';
+import TextRequisite from '../inputs/TextRequisite';
 import { AppText } from '../text';
+import { AppBaseForm } from './AppBaseForm';
 
 const RateForm = ({
   title,
@@ -41,7 +41,7 @@ const RateForm = ({
         )}
       </View>
       {!isNew && <AppText style={styles.subtitle}>{subtitle}</AppText>}
-      <AppRequisite
+      <TextRequisite
         value={rate}
         name="Rate"
         placeholder="Empty"

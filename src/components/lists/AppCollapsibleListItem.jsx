@@ -16,8 +16,11 @@ const AppCollapsibleListItem = ({
     : { ...opacityStyle, ...expandedOpacityStyle };
 
   const handleLongPress = () => {
-    setCollapsed(true);
-    setTimeout(() => onLongPress(), 320); // because of duration of Collapsible part is 300ms dnd should wait a little bit more
+    if (!collapsed) {
+      setCollapsed(true);
+      setTimeout(() => onLongPress(), 330);
+    } // because of animation duration of Collapsible part is 300ms d-n-d should wait a little bit more
+    else onLongPress();
   };
 
   return (

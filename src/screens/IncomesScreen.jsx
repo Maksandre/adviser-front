@@ -13,10 +13,11 @@ import {
   updateIncome,
   deleteIncome,
 } from '../store/actions/income';
+import { removeItemAlert } from '../components/alerts/removeItemAlert';
 
 const itemInitialState = {
   name: '',
-  amount: null,
+  amount: '',
   dateBegin: '',
   dateEnd: '',
 };
@@ -35,31 +36,54 @@ const IncomesScreen = ({
     getIncomes().then(console.log(incomes));
   }, [setSelectedItem]);
 
+  const handleClose = () => {
+    setModalVisisble(false);
+  };
+
   const handleDragEnd = (data) => {
     updateIncome(data);
   };
 
   const handleSubmit = () => {
-    setModalVisisble(false);
+    if (selectedItem.id) {
+      updateIncome(selectedItem);
+    } else {
+      // TODO
+    }
+    handleClose();
   };
 
-  const handleClose = () => {
-    setModalVisisble(false);
-  };
-
-  const handleEditClick = () => {
+  const handleEditClick = (item) => {
+    console.log('ITEM', item);
+    setSelectedItem(item);
     setModalVisisble(true);
   };
 
   const handleAddPress = () => {
+    setSelectedItem(itemInitialState);
     setModalVisisble(true);
+  };
+
+  const handleDelete = () => {
+    removeItemAlert(selectedItem, () => {
+      deleteIncome(selectedItem.id);
+      handleClose();
+    });
   };
 
   return (
     <AppView>
       <IncomeModal
+        item={selectedItem}
         isVisible={modalVisible}
+        onTitleChange={(text) =>
+          setSelectedItem({ ...selectedItem, name: text })
+        }
+        onAmountChange={(text) =>
+          setSelectedItem({ ...selectedItem, amount: text })
+        }
         onSubmit={handleSubmit}
+        onDelete={handleDelete}
         onClose={handleClose}
       />
       <View style={styles.titleContainer}>
@@ -69,7 +93,8 @@ const IncomesScreen = ({
       <ValuableList
         data={incomes.sort((a, b) => b.position - a.position)}
         onDragEnd={handleDragEnd}
-        onAddPress={handleEditClick}
+        onPressEdit={handleEditClick}
+        onAddPress={handleAddPress}
       />
     </AppView>
   );

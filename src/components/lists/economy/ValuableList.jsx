@@ -4,11 +4,11 @@ import AppGhostButton from '../../buttons/AppGhostButton';
 import AppDraggableList from '../AppDraggableList';
 import ValuableListItem from './ValuableListItem';
 
-const ValuableList = ({ data, onDragEnd, onAddPress }) => {
+const ValuableList = ({ data, onDragEnd, onPressEdit, onAddPress }) => {
   const renderItem = ({ item, drag, isActive }) => (
     <ValuableListItem
       item={item}
-      onPressEdit={onAddPress}
+      onPressEdit={() => onPressEdit(item)}
       onLongPress={drag}
       isActive={isActive}
     />

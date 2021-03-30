@@ -1,21 +1,19 @@
 import React from 'react';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { BOLD } from '../../constants/commonui';
 import AppHiddenInput from '../inputs/AppHiddenInput';
-import AppRequisite from '../inputs/AppRequisite';
 import { AppBaseForm } from './AppBaseForm';
 import { COLOR } from '../../constants/colors';
 import { AppText } from '../text';
+import AppRequisite from '../inputs/AppRequisite';
 
-const RateForm = ({
-  title,
-  titlePlaceholder,
+const IncomeForm = ({
+  item,
   subtitle,
   onTitleChange,
-  rate,
-  onRateChange,
+  onAmountChange,
   onDelete,
   isNew,
 }) => {
@@ -23,8 +21,8 @@ const RateForm = ({
     <AppBaseForm style={{ marginTop: '10%' }}>
       <View style={styles.titleWrapper}>
         <AppHiddenInput
-          value={title}
-          placeholder={titlePlaceholder || 'Empty'}
+          value={item.name}
+          placeholder="Income name"
           style={styles.title}
           onChangeText={onTitleChange}
           autoFocus={isNew}
@@ -42,11 +40,11 @@ const RateForm = ({
       </View>
       {!isNew && <AppText style={styles.subtitle}>{subtitle}</AppText>}
       <AppRequisite
-        value={rate}
-        name="Rate"
+        value={item.amount.toString()}
+        name="Amount"
         placeholder="Empty"
-        onChangeText={onRateChange}
-        measure=" %"
+        onChangeText={onAmountChange}
+        measure=" $"
       />
     </AppBaseForm>
   );
@@ -68,4 +66,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RateForm;
+export default IncomeForm;

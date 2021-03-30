@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import AppView from '../components/AppView';
 import ValuableList from '../components/lists/economy/ValuableList';
 import IncomeModal from '../components/modal/IncomeModal';
+import { AppSubtitle } from '../components/text';
+import AppCreateButton from '../components/buttons/AppCreateButton';
 import {
   getIncomes,
   createIncome,
@@ -31,7 +33,7 @@ const IncomesScreen = ({
 
   useEffect(() => {
     getIncomes().then(console.log(incomes));
-  }, []);
+  }, [setSelectedItem]);
 
   const handleDragEnd = (data) => {
     updateIncome(data);
@@ -49,6 +51,10 @@ const IncomesScreen = ({
     setModalVisisble(true);
   };
 
+  const handleAddPress = () => {
+    setModalVisisble(true);
+  };
+
   return (
     <AppView>
       <IncomeModal
@@ -56,6 +62,10 @@ const IncomesScreen = ({
         onSubmit={handleSubmit}
         onClose={handleClose}
       />
+      <View style={styles.titleContainer}>
+        <AppSubtitle>Monthly incomes</AppSubtitle>
+        <AppCreateButton onPress={handleAddPress} />
+      </View>
       <ValuableList
         data={incomes.sort((a, b) => b.position - a.position)}
         onDragEnd={handleDragEnd}
@@ -65,7 +75,14 @@ const IncomesScreen = ({
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  titleContainer: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    marginVertical: 10,
+  },
+});
 
 function mapStateToProps(state) {
   return {

@@ -15,11 +15,16 @@ const AppCollapsibleListItem = ({
     ? opacityStyle
     : { ...opacityStyle, ...expandedOpacityStyle };
 
+  const handleLongPress = () => {
+    setCollapsed(true);
+    setTimeout(() => onLongPress(), 320); // because of duration of Collapsible part is 300ms dnd should wait a little bit more
+  };
+
   return (
     <View>
       <AppListItem
         onPress={() => setCollapsed(!collapsed)}
-        onLongPress={onLongPress}
+        onLongPress={handleLongPress}
         opacityStyle={style}
       >
         {children[0]}

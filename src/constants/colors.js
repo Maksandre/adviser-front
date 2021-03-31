@@ -5,6 +5,8 @@ export const COLOR = {
   PURE_WHITE: '#fff',
   GRAY: '#808080',
   BLUE: '#007AFF',
+  BLUE_LIGHT: '#73B5FF',
+  BLUE_HEAVY: '#0000ff',
   ORANGE: '#FF5900',
   ORANGE_LITE: '#FFCDB2',
   ORANGE_HEAVY: '#A63A00',

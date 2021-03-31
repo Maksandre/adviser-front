@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { TextInputMask } from 'react-native-masked-text';
 
 import { COLOR } from '../../constants/colors';
-import { BOLD, RADIUS } from '../../constants/commonui';
+import { SEMI_BOLD, RADIUS } from '../../constants/commonui';
 import AppRequisite from './AppRequisite';
 
 const DateRequisite = ({ name, placeholder, value, onChangeText, measure }) => {
@@ -31,11 +31,12 @@ const styles = StyleSheet.create({
   input: {
     flex: 2,
     fontSize: 16,
-    fontWeight: BOLD,
-    color: COLOR.ORANGE,
-    backgroundColor: COLOR.ORANGE_LITE,
+    fontWeight: SEMI_BOLD,
+    backgroundColor: COLOR.PURE_WHITE,
+    borderColor: COLOR.ORANGE,
+    borderWidth: 2,
     borderRadius: RADIUS,
-    paddingVertical: 10,
+    paddingVertical: 8,
     paddingRight: 10,
     borderRadius: RADIUS,
     textAlign: 'right',

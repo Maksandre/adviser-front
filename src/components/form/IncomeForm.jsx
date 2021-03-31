@@ -7,6 +7,7 @@ import { BOLD } from '../../constants/commonui';
 import AppHiddenInput from '../inputs/AppHiddenInput';
 import DateRequisite from '../inputs/DateRequisite';
 import TextRequisite from '../inputs/TextRequisite';
+import AppDateInput from '../inputs/AppDateInput';
 import { AppText } from '../text';
 import { AppBaseForm } from './AppBaseForm';
 
@@ -63,6 +64,7 @@ const IncomeForm = ({
         value={item.dateEnd}
         onChangeText={onDateEndChange}
       />
+      <AppDateInput />
     </AppBaseForm>
   );
 };

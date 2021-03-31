@@ -9,6 +9,7 @@ import DateRequisite from '../inputs/DateRequisite';
 import TextRequisite from '../inputs/TextRequisite';
 import { AppText } from '../text';
 import { AppBaseForm } from './AppBaseForm';
+import AppDateInput from '../inputs/AppDateInput';
 
 const IncomeForm = ({
   item,
@@ -63,6 +64,7 @@ const IncomeForm = ({
         value={item.dateEnd}
         onChangeText={onDateEndChange}
       />
+      <AppDateInput />
     </AppBaseForm>
   );
 };

@@ -23,7 +23,7 @@ const months = [
   'Dec',
 ];
 
-const AppDateInput = () => {
+const AppDateInput = ({ onChangeText }) => {
   const [date, setDate] = useState('');
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
@@ -46,6 +46,7 @@ const AppDateInput = () => {
     if (validText.length === 2) {
       yearElement.current.focus();
     }
+    onChangeText(date);
   };
 
   const handleYearChange = (text) => {

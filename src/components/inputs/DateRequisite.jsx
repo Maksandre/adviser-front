@@ -4,6 +4,7 @@ import { TextInputMask } from 'react-native-masked-text';
 
 import { COLOR } from '../../constants/colors';
 import { BOLD, RADIUS } from '../../constants/commonui';
+import AppDateInput from './AppDateInput';
 import AppRequisite from './AppRequisite';
 
 const DateRequisite = ({ name, placeholder, value, onChangeText, measure }) => {
@@ -12,16 +13,7 @@ const DateRequisite = ({ name, placeholder, value, onChangeText, measure }) => {
   console.log('Parsed date: ', date);
 
   const Input = () => {
-    return (
-      <TextInputMask
-        style={styles.input}
-        placeholder={placeholder}
-        type="datetime"
-        options={{ format: 'MM/DD/YYYY' }}
-        value={value}
-        onChangeText={onChangeText}
-      />
-    );
+    return <AppDateInput onChangeText={onChangeText} />;
   };
 
   return <AppRequisite name={name} measure={measure} Input={Input} />;

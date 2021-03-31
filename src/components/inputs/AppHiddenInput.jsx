@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   input: {
     borderRadius: RADIUS,
     color: COLOR.BLACK,
-    fontSize: 20,
+    fontSize: 16,
     paddingVertical: 10,
     paddingRight: 10,
     borderRadius: RADIUS,

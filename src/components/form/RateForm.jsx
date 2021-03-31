@@ -21,26 +21,28 @@ const RateForm = ({
 }) => {
   return (
     <AppBaseForm style={{ marginTop: '10%' }}>
-      <View style={styles.titleWrapper}>
-        <AppHiddenInput
-          value={title}
-          placeholder={titlePlaceholder || 'Empty'}
-          style={styles.title}
-          onChangeText={onTitleChange}
-          autoFocus={isNew}
-          multiline={true}
-        />
-        {!isNew && (
-          <TouchableOpacity onPress={onDelete}>
-            <MaterialCommunityIcons
-              name="trash-can-outline"
-              size={36}
-              color={COLOR.ORANGE}
-            />
-          </TouchableOpacity>
-        )}
+      <View style={styles.top}>
+        <View style={styles.titleWrapper}>
+          <AppHiddenInput
+            value={title}
+            placeholder={titlePlaceholder || 'Empty'}
+            style={styles.title}
+            onChangeText={onTitleChange}
+            autoFocus={isNew}
+            multiline={true}
+          />
+          {!isNew && (
+            <TouchableOpacity onPress={onDelete}>
+              <MaterialCommunityIcons
+                name="trash-can-outline"
+                size={36}
+                color={COLOR.ORANGE}
+              />
+            </TouchableOpacity>
+          )}
+        </View>
+        {!isNew && <AppText style={styles.subtitle}>{subtitle}</AppText>}
       </View>
-      {!isNew && <AppText style={styles.subtitle}>{subtitle}</AppText>}
       <TextRequisite
         value={rate}
         name="Rate"
@@ -53,6 +55,9 @@ const RateForm = ({
 };
 
 const styles = StyleSheet.create({
+  top: {
+    paddingBottom: 30,
+  },
   titleWrapper: {
     flexDirection: 'row',
     alignItems: 'center',

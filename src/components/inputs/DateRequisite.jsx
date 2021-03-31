@@ -30,7 +30,7 @@ const DateRequisite = ({ name, placeholder, value, onChangeText, measure }) => {
 const styles = StyleSheet.create({
   input: {
     flex: 2,
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: BOLD,
     color: COLOR.ORANGE,
     backgroundColor: COLOR.ORANGE_LITE,

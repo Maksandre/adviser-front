@@ -21,11 +21,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: 20,
+    paddingVertical: 10,
   },
   name: {
     flex: 2,
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: BOLD,
   },
   value: {

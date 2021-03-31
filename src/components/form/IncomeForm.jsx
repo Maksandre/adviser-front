@@ -22,26 +22,28 @@ const IncomeForm = ({
 }) => {
   return (
     <AppBaseForm style={{ marginTop: '10%' }}>
-      <View style={styles.titleWrapper}>
-        <AppHiddenInput
-          value={item.name}
-          placeholder="Income name"
-          style={styles.title}
-          onChangeText={onTitleChange}
-          autoFocus={isNew}
-          multiline={true}
-        />
-        {!isNew && (
-          <TouchableOpacity onPress={onDelete}>
-            <MaterialCommunityIcons
-              name="trash-can-outline"
-              size={36}
-              color={COLOR.ORANGE}
-            />
-          </TouchableOpacity>
-        )}
+      <View style={styles.top}>
+        <View style={styles.titleWrapper}>
+          <AppHiddenInput
+            value={item.name}
+            placeholder="Income name"
+            style={styles.title}
+            onChangeText={onTitleChange}
+            autoFocus={isNew}
+            multiline={true}
+          />
+          {!isNew && (
+            <TouchableOpacity onPress={onDelete}>
+              <MaterialCommunityIcons
+                name="trash-can-outline"
+                size={36}
+                color={COLOR.ORANGE}
+              />
+            </TouchableOpacity>
+          )}
+        </View>
+        {!isNew && <AppText style={styles.subtitle}>{subtitle}</AppText>}
       </View>
-      {!isNew && <AppText style={styles.subtitle}>{subtitle}</AppText>}
       <TextRequisite
         value={item.amount.toString()}
         name="Amount"
@@ -66,6 +68,9 @@ const IncomeForm = ({
 };
 
 const styles = StyleSheet.create({
+  top: {
+    paddingBottom: 30,
+  },
   titleWrapper: {
     flexDirection: 'row',
     alignItems: 'center',

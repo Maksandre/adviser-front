@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 
 import { COLOR } from '../../constants/colors';
-import { SEMI_BOLD } from '../../constants/commonui';
+import { BOLD } from '../../constants/commonui';
 import AppHiddenInput from './AppHiddenInput';
 import AppRequisite from './AppRequisite';
 
@@ -26,11 +26,9 @@ const TextRequisite = ({ name, placeholder, value, onChangeText, measure }) => {
 const styles = StyleSheet.create({
   input: {
     flex: 2,
-    fontWeight: SEMI_BOLD,
-    borderWidth: 2,
-    borderColor: COLOR.ORANGE,
-    // color: COLOR.ORANGE,
-    backgroundColor: COLOR.PURE_WHITE,
+    fontWeight: BOLD,
+    color: COLOR.ORANGE,
+    backgroundColor: COLOR.ORANGE_LITE,
   },
 });
 

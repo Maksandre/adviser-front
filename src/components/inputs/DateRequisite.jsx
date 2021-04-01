@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { TextInputMask } from 'react-native-masked-text';
+import { StyleSheet, View } from 'react-native';
 
 import { COLOR } from '../../constants/colors';
 import { BOLD, RADIUS } from '../../constants/commonui';

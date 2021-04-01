@@ -56,7 +56,9 @@ const IncomeForm = ({
         name="Date begin"
         placeholder="Empty"
         value={item.dateBegin}
-        onChangeText={onDateBeginChange}
+        onChangeText={(text) => {
+          console.log('FROM FORM', text);
+        }}
       />
       <DateRequisite
         name="Date end"
@@ -64,7 +66,6 @@ const IncomeForm = ({
         value={item.dateEnd}
         onChangeText={onDateEndChange}
       />
-      <AppDateInput />
     </AppBaseForm>
   );
 };

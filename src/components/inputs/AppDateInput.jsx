@@ -1,6 +1,8 @@
 import React from 'react';
 import { useRef } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Picker, PickerIOS } from '@react-native-picker/picker';
+
 import { TextInput } from 'react-native-gesture-handler';
 import { useState } from 'react/cjs/react.development';
 
@@ -59,41 +61,50 @@ const AppDateInput = ({ onChangeText }) => {
 
   return (
     <View style={styles.wrapper}>
-      <TextInput
-        style={{ ...styles.input, ...styles.inputShort }}
-        value={month}
-        onChangeText={handleMonthChange}
-        onBlur={() => {
-          if (month.length === 1) {
-            handleMonthChange(`0${month}`);
-          }
-          if (month.length !== 3) setMonth(months[month - 1]);
-        }}
-        maxLength={2}
-        placeholder=". ."
-        selectTextOnFocus={true}
-        keyboardType="number-pad"
-        ref={monthElement}
-      />
+      <View style={{ ...styles.input }}>
+        <Picker
+          style={{ ...styles.inputShort }}
+          selectedValue={month}
+          onValueChange={(item) => setMonth(item)}
+          mode="dropdown"
+          prompt="Select month"
+          itemStyle={styles.itemIOS}
+        >
+          <Picker.Item label="January" value={'1'} />
+          <Picker.Item label="February" value={'2'} />
+          <Picker.Item label="Marh" value={'3'} />
+          <Picker.Item label="April" value={'4'} />
+          <Picker.Item label="May" value={'5'} />
+          <Picker.Item label="June" value={'6'} />
+          <Picker.Item label="July" value={'7'} />
+          <Picker.Item label="August" value={'8'} />
+          <Picker.Item label="September" value={'9'} />
+          <Picker.Item label="October" value={'10'} />
+          <Picker.Item label="November" value={'11'} />
+          <Picker.Item label="December" value={'12'} />
+        </Picker>
+      </View>
       <AppText style={styles.divider}>–</AppText>
-      <TextInput
-        style={{ ...styles.input, ...styles.inputLong }}
-        value={year}
-        onChangeText={handleYearChange}
-        onBlur={() => {
-          if (year.length === 1) handleYearChange(`200${year}`);
-          else if (year.length === 2 && year < 90)
-            handleYearChange(`20${year}`);
-          else if (year.length === 2 && year >= 90)
-            handleYearChange(`19${year}`);
-          else if (year.length === 3) handleYearChange(`2${year}`);
-        }}
-        maxLength={4}
-        placeholder=". . . ."
-        selectTextOnFocus={true}
-        keyboardType="number-pad"
-        ref={yearElement}
-      />
+      <View>
+        <TextInput
+          style={{ ...styles.input, ...styles.inputLong }}
+          value={year}
+          onChangeText={handleYearChange}
+          onBlur={() => {
+            if (year.length === 1) handleYearChange(`200${year}`);
+            else if (year.length === 2 && year < 90)
+              handleYearChange(`20${year}`);
+            else if (year.length === 2 && year >= 90)
+              handleYearChange(`19${year}`);
+            else if (year.length === 3) handleYearChange(`2${year}`);
+          }}
+          maxLength={4}
+          placeholder=". . . ."
+          selectTextOnFocus={true}
+          keyboardType="number-pad"
+          ref={yearElement}
+        />
+      </View>
     </View>
   );
 };
@@ -113,10 +124,26 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.PURE_WHITE,
   },
   inputShort: {
-    width: 50,
+    width: 100,
+    height: '100%', // TODO если размеры поехали в андроид то причина здесь
+    backgroundColor: 'transparent',
+    padding: 0,
   },
   inputLong: {
     width: 70,
+    height: '100%',
+  },
+  inputItemAndroid: {
+    padding: 0,
+    margin: 0,
+    fontSize: 30,
+  },
+  itemIOS: {
+    // backgroundColor: 'red',
+    height: '100%',
+    padding: 0,
+    margin: 0,
+    backgroundColor: 'transparent',
   },
   divider: {
     color: COLOR.GRAY,

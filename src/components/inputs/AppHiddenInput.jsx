@@ -41,7 +41,6 @@ export const AppHiddenInput = ({
 
 const styles = StyleSheet.create({
   input: {
-    borderRadius: RADIUS,
     color: COLOR.BLACK,
     fontSize: 16,
     paddingVertical: 10,

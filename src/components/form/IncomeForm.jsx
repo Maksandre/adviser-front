@@ -9,7 +9,6 @@ import DateRequisite from '../inputs/DateRequisite';
 import TextRequisite from '../inputs/TextRequisite';
 import { AppText } from '../text';
 import { AppBaseForm } from './AppBaseForm';
-import AppDateInput from '../inputs/AppDateInput';
 
 const IncomeForm = ({
   item,
@@ -56,9 +55,7 @@ const IncomeForm = ({
         name="Date begin"
         placeholder="Empty"
         value={item.dateBegin}
-        onChangeText={(text) => {
-          console.log('FROM FORM', text);
-        }}
+        onChangeText={onDateBeginChange}
       />
       <DateRequisite
         name="Date end"

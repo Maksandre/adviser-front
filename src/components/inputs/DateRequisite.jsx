@@ -7,10 +7,6 @@ import AppDateInput from './AppDateInput';
 import AppRequisite from './AppRequisite';
 
 const DateRequisite = ({ name, placeholder, value, onChangeText, measure }) => {
-  const date = new Date(value).toLocaleDateString();
-  console.log('Initial date: ', value);
-  console.log('Parsed date: ', date);
-
   const Input = () => {
     return <AppDateInput onChangeText={onChangeText} />;
   };

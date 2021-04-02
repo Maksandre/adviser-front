@@ -32,7 +32,6 @@ function AppDraggableList({
 
       data[to].position = newPosition;
 
-      console.log('MOVE', data[to]);
       onDragEnd(data[to]);
     }
   };

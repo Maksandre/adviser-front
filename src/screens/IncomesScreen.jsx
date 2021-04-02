@@ -31,9 +31,10 @@ const IncomesScreen = ({
 }) => {
   const [selectedItem, setSelectedItem] = useState(itemInitialState);
   const [modalVisible, setModalVisisble] = useState(false);
+  console.log(selectedItem);
 
   useEffect(() => {
-    getIncomes().then(console.log(incomes));
+    getIncomes();
   }, [setSelectedItem]);
 
   const handleClose = () => {
@@ -89,7 +90,6 @@ const IncomesScreen = ({
           setSelectedItem({ ...selectedItem, amount: text })
         }
         onDateBeginChange={(text) => {
-          console.log(text);
           setSelectedItem({ ...selectedItem, dateBegin: text });
         }}
         onDateEndChange={(text) => {

@@ -1,5 +1,6 @@
 import { economy } from './economy';
 import { incomes } from './incomes';
+import { expenses } from './expenses';
 import { query } from './sql';
 
 export default DB = {
@@ -14,8 +15,12 @@ export default DB = {
       query(
         'CREATE TABLE IF NOT EXISTS incomes (id INTEGER PRIMARY KEY NOT NULL, name TEXT NOT NULL, amount REAL NOT NULL, dateBegin TEXT, dateEnd TEXT, position INTEGER NOT NULL)',
       ),
+      query(
+        'CREATE TABLE IF NOT EXISTS expenses (id INTEGER PRIMARY KEY NOT NULL, name TEXT NOT NULL, amount REAL NOT NULL, dateBegin TEXT, dateEnd TEXT, position INTEGER NOT NULL)',
+      ),
     );
   },
   economy,
   incomes,
+  expenses,
 };

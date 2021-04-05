@@ -1,5 +1,3 @@
-// https://github.com/DieTime/react-native-date-picker
-
 import React, { useEffect, useRef } from 'react';
 import {
   View,
@@ -8,59 +6,58 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import { RADIUS } from '../../constants/commonui';
+import { COLOR } from '../../constants/colors.js';
 
 const AppPicker = ({
   value,
   elements,
   onChange,
-  height,
-  fontSize,
-  textColor,
-  markColor,
-  markHeight,
-  markWidth,
-  pickerHeight,
-  pickerWidth,
+  height = 120,
+  width = '100%',
+  elementHeight,
+  textStyle,
+  markStyle,
 }) => {
-  const dHeight = Math.round(height / 1); // TODO to prop
+  const elHeight = elementHeight ? elementHeight : Math.round(height / 2.2);
 
-  const mHeight = markHeight || Math.min(dHeight, 65);
-  const mWidth = markWidth || '70%';
+  const mHeight = markStyle?.height || Math.min(elHeight, 60);
+  const mWidth = markStyle?.width || '100%';
 
   const scrollRef = useRef(null);
   useEffect(() => {
     setTimeout(() => {
+      // because of Modal
       scrollRef.current.scrollTo({
-        y: dHeight * elements.indexOf(value),
+        y: elHeight * elements.indexOf(value),
         animated: false,
       });
-    }, 1); // because of Modal
+    }, 1);
   }, []);
 
   const handleChange = ({ nativeEvent }) => {
-    const element = nativeEvent.contentOffset.y / dHeight;
+    const element = nativeEvent.contentOffset.y / elHeight;
     onChange(elements[element]);
   };
 
   return (
-    <View style={[styles.picker, { height: pickerHeight, width: pickerWidth }]}>
+    <View style={[styles.picker, { height, width }]}>
       <View style={styles.block}>
         <View
           style={[
             styles.mark,
             {
               top: (height - mHeight) / 2,
-              backgroundColor: markColor || 'rgba(0, 0, 0, 0.05)',
+              backgroundColor: 'rgba(0, 0, 0, 0.05)',
               height: mHeight,
               width: mWidth,
             },
+            markStyle,
           ]}
         />
         <ScrollView
           ref={scrollRef}
           style={styles.scroll}
-          snapToInterval={dHeight}
+          snapToInterval={elHeight}
           showsVerticalScrollIndicator={false}
           scrollEventThrottle={0}
           onScroll={handleChange}
@@ -71,7 +68,7 @@ const AppPicker = ({
                 key={index}
                 onPress={() => {
                   scrollRef.current.scrollTo({
-                    y: dHeight * index,
+                    y: elHeight * index,
                     animated: true,
                   });
                 }}
@@ -80,16 +77,14 @@ const AppPicker = ({
                   style={[
                     styles.text,
                     {
-                      fontSize: fontSize || 22,
-                      color: textColor || '#000000',
                       marginBottom:
                         index === elements.length - 1
-                          ? height / 2 - dHeight / 2
+                          ? height / 2 - elHeight / 2
                           : 0,
-                      marginTop: index === 0 ? height / 2 - dHeight / 2 : 0,
-                      lineHeight: dHeight,
-                      height: dHeight,
+                      marginTop: index === 0 ? height / 2 - elHeight / 2 : 0,
+                      lineHeight: elHeight,
                     },
+                    textStyle,
                   ]}
                 >
                   {value}
@@ -106,8 +101,6 @@ const AppPicker = ({
 const styles = StyleSheet.create({
   picker: {
     flexDirection: 'row',
-    height: '100%',
-    width: '100%',
   },
   block: {
     flex: 1,
@@ -121,10 +114,10 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     textAlign: 'center',
+    color: COLOR.BLACK,
   },
   mark: {
     position: 'absolute',
-    borderRadius: RADIUS,
   },
 });
 

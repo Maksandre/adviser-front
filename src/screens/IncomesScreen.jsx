@@ -18,8 +18,6 @@ import { removeItemAlert } from '../components/alerts/removeItemAlert';
 const itemInitialState = {
   name: '',
   amount: '',
-  dateBegin: '',
-  dateEnd: '',
 };
 
 const IncomesScreen = ({
@@ -31,7 +29,7 @@ const IncomesScreen = ({
 }) => {
   const [selectedItem, setSelectedItem] = useState(itemInitialState);
   const [modalVisible, setModalVisisble] = useState(false);
-  console.log(selectedItem);
+  // console.log(selectedItem);
 
   useEffect(() => {
     getIncomes();

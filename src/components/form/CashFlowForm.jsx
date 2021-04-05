@@ -12,6 +12,7 @@ import { AppBaseForm } from './AppBaseForm';
 
 const CashFlowForm = ({
   item,
+  titlePlaceholder,
   subtitle,
   onTitleChange,
   onAmountChange,
@@ -26,7 +27,7 @@ const CashFlowForm = ({
         <View style={styles.titleWrapper}>
           <AppHiddenInput
             value={item.name}
-            placeholder="Income name"
+            placeholder={titlePlaceholder}
             style={styles.title}
             onChangeText={onTitleChange}
             autoFocus={isNew}

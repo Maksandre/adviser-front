@@ -5,6 +5,8 @@ import AppModal from './AppModal';
 
 const CashFlowModal = ({
   item,
+  titlePlaceholder,
+  subtitle,
   onTitleChange,
   onAmountChange,
   onDateBeginChange,
@@ -24,7 +26,8 @@ const CashFlowModal = ({
     >
       <CashFlowForm
         item={item}
-        subtitle={'Monthly income'}
+        titlePlaceholder={titlePlaceholder}
+        subtitle={subtitle}
         onTitleChange={onTitleChange}
         onAmountChange={onAmountChange}
         onDateBeginChange={onDateBeginChange}

@@ -29,7 +29,6 @@ const ExpensesScreen = ({
 }) => {
   const [selectedItem, setSelectedItem] = useState(itemInitialState);
   const [modalVisible, setModalVisisble] = useState(false);
-  // console.log(selectedItem);
 
   useEffect(() => {
     getExpenses();
@@ -80,6 +79,8 @@ const ExpensesScreen = ({
     <AppView>
       <CashFlowModal
         item={selectedItem}
+        titlePlaceholder="Expense name"
+        subtitle="Monthly expense"
         isVisible={modalVisible}
         onTitleChange={(text) =>
           setSelectedItem({ ...selectedItem, name: text })

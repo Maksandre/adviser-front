@@ -80,6 +80,8 @@ const IncomesScreen = ({
     <AppView>
       <CashFlowModal
         item={selectedItem}
+        titlePlaceholder="Income name"
+        subtitle="Monthly income"
         isVisible={modalVisible}
         onTitleChange={(text) =>
           setSelectedItem({ ...selectedItem, name: text })

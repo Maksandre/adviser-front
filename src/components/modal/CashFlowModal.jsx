@@ -1,9 +1,9 @@
 import React from 'react';
 
-import IncomeForm from '../form/IncomeForm';
+import CashFlowForm from '../form/CashFlowForm';
 import AppModal from './AppModal';
 
-const IncomeModal = ({
+const CashFlowModal = ({
   item,
   onTitleChange,
   onAmountChange,
@@ -22,7 +22,7 @@ const IncomeModal = ({
       closeButton={{ title: 'Close' }}
       closeByX={false}
     >
-      <IncomeForm
+      <CashFlowForm
         item={item}
         subtitle={'Monthly income'}
         onTitleChange={onTitleChange}
@@ -36,4 +36,4 @@ const IncomeModal = ({
   );
 };
 
-export default IncomeModal;
+export default CashFlowModal;

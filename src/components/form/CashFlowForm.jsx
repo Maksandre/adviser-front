@@ -10,7 +10,7 @@ import TextRequisite from '../inputs/TextRequisite';
 import { AppText } from '../text';
 import { AppBaseForm } from './AppBaseForm';
 
-const IncomeForm = ({
+const CashFlowForm = ({
   item,
   subtitle,
   onTitleChange,
@@ -86,4 +86,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default IncomeForm;
+export default CashFlowForm;

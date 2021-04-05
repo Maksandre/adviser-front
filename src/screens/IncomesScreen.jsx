@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import AppView from '../components/AppView';
 import ValuableList from '../components/lists/economy/ValuableList';
-import IncomeModal from '../components/modal/IncomeModal';
+import CashFlowModal from '../components/modal/CashFlowModal';
 import { AppSubtitle } from '../components/text';
 import AppCreateButton from '../components/buttons/AppCreateButton';
 import {
@@ -78,7 +78,7 @@ const IncomesScreen = ({
 
   return (
     <AppView>
-      <IncomeModal
+      <CashFlowModal
         item={selectedItem}
         isVisible={modalVisible}
         onTitleChange={(text) =>

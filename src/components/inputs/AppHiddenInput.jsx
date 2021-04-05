@@ -4,9 +4,11 @@ import { COLOR } from '../../constants/colors';
 import { RADIUS } from '../../constants/commonui';
 import { SHADOW } from '../../constants/styles';
 
-export const AppHiddenInput = ({
+const AppHiddenInput = ({
   value,
   onChangeText,
+  onBlur,
+  onFocus,
   placeholder,
   placeholderTextColor,
   style,
@@ -16,6 +18,16 @@ export const AppHiddenInput = ({
   multiline,
 }) => {
   const [focused, setFocused] = useState(false);
+
+  const handleBlur = () => {
+    if (onBlur) onBlur();
+    setFocused(false);
+  };
+
+  const handleFocus = () => {
+    if (onFocus) onFocus();
+    setFocused(true);
+  };
 
   return (
     <TextInput
@@ -32,8 +44,8 @@ export const AppHiddenInput = ({
       keyboardType={keyboardType}
       autoCorrect={false}
       autoFocus={autoFocus}
-      onFocus={() => setFocused(true)}
-      onBlur={() => setFocused(false)}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
       multiline={multiline}
     />
   );

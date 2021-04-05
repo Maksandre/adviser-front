@@ -1,13 +1,16 @@
+import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
+import { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-
 import { TextInput } from 'react-native-gesture-handler';
 import { useState } from 'react/cjs/react.development';
 
 import { COLOR } from '../../constants/colors';
 import { RADIUS } from '../../constants/commonui';
+import { getMonth, getYear } from '../../utils/dates';
 import { AppText } from '../text';
 import AppPicker from './AppPicker';
+import AppHiddenInput from '../inputs/AppHiddenInput';
 
 const months = [
   '. . .',
@@ -25,9 +28,15 @@ const months = [
   'December',
 ];
 
-const AppDateInput = ({ onChangeText }) => {
-  const [month, setMonth] = useState('');
+const AppDateInput = ({ date, onChangeText }) => {
+  const [month, setMonth] = useState(months[getMonth(date)]);
   const [year, setYear] = useState('');
+
+  useEffect(() => {
+    if (date) {
+      setYear(getYear(date).toString());
+    }
+  }, []);
 
   const handleMonthChange = (text) => {
     setMonth(text);
@@ -46,25 +55,35 @@ const AppDateInput = ({ onChangeText }) => {
 
   return (
     <View style={styles.wrapper}>
-      <View style={{ marginRight: 3 }}>
+      <View style={styles.inputMonth}>
         <AppPicker
           value={month}
           elements={months}
-          onChange={(text) => setMonth(text)}
+          onChange={handleMonthChange}
+          markStyle={{
+            height: 40,
+            borderRadius: RADIUS,
+            backgroundColor: COLOR.PURE_WHITE,
+          }}
+          textStyle={{ alignSelf: 'flex-end', marginRight: 10 }}
           height={40}
-          pickerWidth={100}
-          fontSize={16}
-          textColor={COLOR.BLACK}
-          markColor={COLOR.PURE_WHITE}
-          markHeight={40}
-          markWidth={100}
-          pickerHeight={40}
+          elementHeight={40}
+        />
+        <LinearGradient
+          style={[styles.gradient, { bottom: 0, height: 10 }]}
+          colors={['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 1)']}
+          pointerEvents={'none'}
+        />
+        <LinearGradient
+          style={[styles.gradient, { top: 0, height: 10 }]}
+          colors={['rgba(255, 255, 255, 1)', 'rgba(255, 255, 255, 0)']}
+          pointerEvents={'none'}
         />
       </View>
       <AppText style={styles.divider}>–</AppText>
       <View>
-        <TextInput
-          style={{ ...styles.input, ...styles.inputLong }}
+        <AppHiddenInput
+          style={{ ...styles.input, ...styles.inputYear }}
           value={year}
           onChangeText={handleYearChange}
           onBlur={() => {
@@ -76,7 +95,7 @@ const AppDateInput = ({ onChangeText }) => {
             else if (year.length === 3) handleYearChange(`2${year}`);
           }}
           maxLength={4}
-          placeholder=". . . ."
+          placeholder="year"
           selectTextOnFocus={true}
           keyboardType="number-pad"
         />
@@ -99,12 +118,21 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: COLOR.PURE_WHITE,
   },
-  inputLong: {
+  inputYear: {
     width: 70,
-    height: '100%',
+    height: 40,
+  },
+  inputMonth: {
+    width: 100,
+    marginRight: 3,
   },
   divider: {
     color: COLOR.GRAY,
+  },
+  gradient: {
+    position: 'absolute',
+    width: '100%',
+    borderRadius: RADIUS,
   },
 });
 

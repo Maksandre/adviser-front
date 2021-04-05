@@ -55,9 +55,9 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.BLUE,
     borderRadius: RADIUS,
     marginTop: 10,
-    ...SHADOW,
   },
   opacityActive: {
+    ...SHADOW,
     shadowOpacity: 0.8,
   },
   expandedOpacityStyle: {
@@ -68,7 +68,6 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.BLUE,
     borderBottomRightRadius: RADIUS,
     borderBottomLeftRadius: RADIUS,
-    ...SHADOW,
   },
   button: {
     alignItems: 'flex-end',

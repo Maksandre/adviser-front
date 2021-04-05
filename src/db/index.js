@@ -12,8 +12,7 @@ export default DB = {
         'CREATE TABLE IF NOT EXISTS inflation_rates (id INTEGER PRIMARY KEY NOT NULL, name TEXT NOT NULL, rate REAL NOT NULL, position INTEGER NOT NULL)',
       ),
       query(
-        // 'DELETE from incomes',
-        'CREATE TABLE IF NOT EXISTS incomes (id INTEGER PRIMARY KEY NOT NULL, name TEXT NOT NULL, amount REAL NOT NULL, dateBegin TEXT NOT NULL, dateEnd TEXT NOT NULL, position INTEGER NOT NULL)',
+        'CREATE TABLE IF NOT EXISTS incomes (id INTEGER PRIMARY KEY NOT NULL, name TEXT NOT NULL, amount REAL NOT NULL, dateBegin TEXT, dateEnd TEXT, position INTEGER NOT NULL)',
       ),
     );
   },

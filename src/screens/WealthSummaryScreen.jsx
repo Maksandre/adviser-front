@@ -30,14 +30,6 @@ const WealthSummaryScreen = () => {
         value={value}
         elements={months}
         onChange={(text) => setValue(text)}
-        height={40}
-        pickerHeight={40}
-        pickerWidth={100}
-        fontSize={16}
-        textColor={COLOR.BLACK}
-        markColor={COLOR.PURE_WHITE}
-        markHeight={40}
-        markWidth={100}
       />
     </AppView>
   );

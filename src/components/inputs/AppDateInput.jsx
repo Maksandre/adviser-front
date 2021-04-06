@@ -2,7 +2,6 @@ import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
 import { useState } from 'react/cjs/react.development';
 
 import { COLOR } from '../../constants/colors';

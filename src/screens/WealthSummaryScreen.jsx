@@ -5,7 +5,7 @@ import AppView from '../components/AppView';
 const WealthSummaryScreen = () => {
   return (
     <AppView style={styles.container}>
-      <Text>Assets Liabilities Summary</Text>
+      <Text>Wealth screen</Text>
     </AppView>
   );
 };

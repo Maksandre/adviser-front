@@ -3,13 +3,13 @@ import { StyleSheet } from 'react-native';
 import AppGhostButton from '../../buttons/AppGhostButton';
 
 import AppDraggableList from '../AppDraggableList';
-import EconomyListItem from './EconomyListItem';
+import RateListItem from './RateListItem';
 
-const EconomyList = ({ data, onPress, onDragEnd, onAddPress }) => {
+const RateList = ({ data, onPress, onDragEnd, onAddPress }) => {
   const renderItem = ({ item, drag, isActive }) => (
-    <EconomyListItem
+    <RateListItem
       item={item}
-      drag={drag}
+      onLongPress={drag}
       isActive={isActive}
       onPress={() => onPress(item)}
     />
@@ -21,26 +21,16 @@ const EconomyList = ({ data, onPress, onDragEnd, onAddPress }) => {
       keyExtractor={(item) => item.id.toString()}
       renderItem={renderItem}
       onDragEnd={onDragEnd}
-      style={styles.list}
-      footerComponent={
-        <AppGhostButton onPress={onAddPress} style={styles.ghostButton} />
-      }
+      footerComponent={<AppGhostButton onPress={onAddPress} />}
       footerStyle={styles.footer}
     />
   );
 };
 
 const styles = StyleSheet.create({
-  list: {
-    flex: 1,
-    backgroundColor: 'red',
-  },
-  ghostButton: {
-    flex: 1,
-  },
   footer: {
     marginTop: 10,
   },
 });
 
-export default EconomyList;
+export default RateList;

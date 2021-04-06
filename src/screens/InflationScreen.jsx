@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, LogBox, StyleSheet, View } from 'react-native';
+import { LogBox, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
-
+import { removeItemAlert } from '../components/alerts/removeItemAlert';
 import AppView from '../components/AppView';
-import { AppSubtitle } from '../components/text';
-import EconomyList from '../components/lists/economy/EconomyList';
+import AppCreateButton from '../components/buttons/AppCreateButton';
+import RateList from '../components/lists/economy/RateList';
 import RateModal from '../components/modal/RateModal';
+import { AppSubtitle } from '../components/text';
 import {
-  getInflationRates,
   createInflationRate,
   deleteInflationRate,
+  getInflationRates,
   updateInflationRate,
 } from '../store/actions/inflation';
-import AppCreateButton from '../components/buttons/AppCreateButton';
 
 LogBox.ignoreLogs(['VirtualizedLists should never be nested']); // TODO wait for fix on github
 
@@ -26,7 +26,7 @@ const InflationScreen = ({
   deleteInflationRate,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [item, setItem] = useState(itemInitialState);
+  const [selectedItem, setSelectedItem] = useState(itemInitialState);
 
   useEffect(() => {
     getInflationRates();
@@ -34,20 +34,15 @@ const InflationScreen = ({
 
   const handleClose = () => {
     setModalVisible(false);
-    setItem(itemInitialState);
-  };
-
-  const handleItemPress = (item) => {
-    setModalVisible(true);
-    setItem(item);
+    setSelectedItem(itemInitialState);
   };
 
   const handleSubmit = () => {
-    if (item.id) {
-      updateInflationRate(item);
+    if (selectedItem.id) {
+      updateInflationRate(selectedItem);
     } else {
       createInflationRate({
-        ...item,
+        ...selectedItem,
         position:
           inflationRates.length > 0
             ? inflationRates.sort((a, b) => b.position - a.position)[0]
@@ -58,33 +53,34 @@ const InflationScreen = ({
     handleClose();
   };
 
+  const handleDelete = () => {
+    removeItemAlert(selectedItem, () => {
+      deleteInflationRate(selectedItem.id);
+      handleClose();
+    });
+  };
+
+  const handleItemPress = (item) => {
+    setSelectedItem(item);
+    setModalVisible(true);
+  };
+
   const handleDragEnd = (data) => {
     updateInflationRate(data);
   };
 
-  const handleDelete = () => {
-    // TODO move into module
-    Alert.alert('Attention!', `You want to delete «${item.name}»?`, [
-      { text: 'Cancel', style: 'cancel' },
-      {
-        text: 'Delete',
-        style: 'destructive',
-        onPress: () => {
-          deleteInflationRate(item.id);
-          handleClose();
-        },
-      },
-    ]);
-  };
-
   return (
-    <AppView style={styles.container}>
+    <AppView>
       <RateModal
-        item={item}
-        titlePlaceholder="Inflation rate name"
-        subtitle="Inflation rate"
-        onTitleChange={(value) => setItem({ ...item, name: value })}
-        onRateChange={(value) => setItem({ ...item, rate: value.trim() })}
+        item={selectedItem}
+        titlePlaceholder={'Inflation rate name'}
+        subtitle={'Inflation rate'}
+        onTitleChange={(value) =>
+          setSelectedItem({ ...selectedItem, name: value })
+        }
+        onRateChange={(value) =>
+          setSelectedItem({ ...selectedItem, rate: value.trim() })
+        }
         onDelete={handleDelete}
         isVisible={modalVisible}
         onClose={handleClose}
@@ -94,7 +90,7 @@ const InflationScreen = ({
         <AppSubtitle>Inflation rates</AppSubtitle>
         <AppCreateButton onPress={() => handleItemPress(itemInitialState)} />
       </View>
-      <EconomyList
+      <RateList
         data={inflationRates.sort((a, b) => b.position - a.position)}
         onPress={handleItemPress}
         onDragEnd={handleDragEnd}
@@ -105,9 +101,6 @@ const InflationScreen = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   titleContainer: {
     alignItems: 'center',
     justifyContent: 'space-between',

@@ -5,17 +5,19 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { COLOR } from '../../constants/colors';
 import { BOLD } from '../../constants/commonui';
 import AppHiddenInput from '../inputs/AppHiddenInput';
+import DateRequisite from '../inputs/DateRequisite';
 import TextRequisite from '../inputs/TextRequisite';
 import { AppText } from '../text';
 import { AppBaseForm } from './AppBaseForm';
 
-const RateForm = ({
-  title,
+const CashFlowForm = ({
+  item,
   titlePlaceholder,
   subtitle,
   onTitleChange,
-  rate,
-  onRateChange,
+  onAmountChange,
+  onDateBeginChange,
+  onDateEndChange,
   onDelete,
   isNew,
 }) => {
@@ -24,8 +26,8 @@ const RateForm = ({
       <View style={styles.top}>
         <View style={styles.titleWrapper}>
           <AppHiddenInput
-            value={title}
-            placeholder={titlePlaceholder || 'Empty'}
+            value={item.name}
+            placeholder={titlePlaceholder}
             style={styles.title}
             onChangeText={onTitleChange}
             autoFocus={isNew}
@@ -44,11 +46,23 @@ const RateForm = ({
         {!isNew && <AppText style={styles.subtitle}>{subtitle}</AppText>}
       </View>
       <TextRequisite
-        value={rate}
-        name="Rate"
+        value={item.amount.toString()}
+        name="Amount"
         placeholder="Empty"
-        onChangeText={onRateChange}
-        measure=" %"
+        onChangeText={onAmountChange}
+        measure=" $"
+      />
+      <DateRequisite
+        name="Date begin"
+        placeholder="Empty"
+        value={item.dateBegin}
+        onChangeText={onDateBeginChange}
+      />
+      <DateRequisite
+        name="Date end"
+        placeholder="Empty"
+        value={item.dateEnd}
+        onChangeText={onDateEndChange}
       />
     </AppBaseForm>
   );
@@ -73,4 +87,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RateForm;
+export default CashFlowForm;

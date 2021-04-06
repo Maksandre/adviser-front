@@ -1,17 +1,23 @@
 import React from 'react';
 import DraggableFlatList from 'react-native-draggable-flatlist';
 
-function AppDraggableList(props) {
+// Несет в себе логику обновления position у dragged компонента
+
+function AppDraggableList({
+  data: initialData,
+  onDragEnd,
+  renderItem,
+  keyExtractor,
+  footerComponent,
+  footerStyle,
+}) {
   const handleDragEnd = ({ data, from, to }) => {
     if (from !== to) {
-      const elementBefore = from > to ? props.data[to - 1] : props.data[to];
-      const elementAfter = from > to ? props.data[to] : props.data[to + 1];
+      const elementBefore = from > to ? initialData[to - 1] : initialData[to];
+      const elementAfter = from > to ? initialData[to] : initialData[to + 1];
 
       const positionBefore = elementBefore?.position;
       const positionAfter = elementAfter?.position;
-
-      console.log('before', elementBefore);
-      console.log('after', elementAfter);
 
       let newPosition;
       if (positionAfter === undefined) {
@@ -26,18 +32,18 @@ function AppDraggableList(props) {
 
       data[to].position = newPosition;
 
-      props.onDragEnd(data[to]);
+      onDragEnd(data[to]);
     }
   };
 
   return (
     <DraggableFlatList
-      data={props.data}
-      renderItem={props.renderItem}
-      keyExtractor={props.keyExtractor}
+      data={initialData}
+      renderItem={renderItem}
+      keyExtractor={keyExtractor}
       onDragEnd={handleDragEnd}
-      ListFooterComponent={props.footerComponent}
-      ListFooterComponentStyle={props.footerStyle}
+      ListFooterComponent={footerComponent}
+      ListFooterComponentStyle={footerStyle}
     />
   );
 }

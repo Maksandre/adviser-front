@@ -50,7 +50,6 @@ export function updateYield(yieldObj) {
 export function deleteYield(id) {
   return function (dispatch) {
     dispatch(beginApiCall());
-    console.log('ID ', id);
     return DB.economy
       .deleteYield(id)
       .then(

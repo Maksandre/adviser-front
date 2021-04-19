@@ -2,7 +2,7 @@ import { query } from './sql';
 
 export const incomes = {
   getIncomes: () =>
-    query('SELECT * FROM incomes', [], (_, result, resolve) =>
+    query('SELECT *, income_id AS id FROM incomes', [], (_, result, resolve) =>
       resolve(result.rows._array),
     ),
 
@@ -25,7 +25,7 @@ export const incomes = {
           position = ?,
           dateBegin = ?, 
           dateEnd = ?
-      WHERE id = ?`,
+      WHERE income_id = ?`,
       [
         income.name,
         income.amount,
@@ -36,5 +36,5 @@ export const incomes = {
       ],
     ),
 
-  deleteIncome: (id) => query(`DELETE FROM incomes WHERE id = ?`, [id]),
+  deleteIncome: (id) => query(`DELETE FROM incomes WHERE income_id = ?`, [id]),
 };

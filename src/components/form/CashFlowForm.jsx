@@ -1,10 +1,12 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { connect } from 'react-redux';
 
 import { COLOR } from '../../constants/colors';
 import { BOLD } from '../../constants/commonui';
 import AppHiddenInput from '../inputs/AppHiddenInput';
+import ConnectionRequisite from '../inputs/ConnectionRequisite';
 import DateRequisite from '../inputs/DateRequisite';
 import TextRequisite from '../inputs/TextRequisite';
 import { AppText } from '../text';
@@ -12,6 +14,10 @@ import { AppBaseForm } from './AppBaseForm';
 
 const CashFlowForm = ({
   item,
+  connectLiabilities,
+  onLiabilitySelect,
+  onLiabilityDelete,
+  connectExpenses,
   titlePlaceholder,
   subtitle,
   onTitleChange,
@@ -19,7 +25,10 @@ const CashFlowForm = ({
   onDateBeginChange,
   onDateEndChange,
   onDelete,
+  hasParent,
   isNew,
+  liabilities,
+  expenses,
 }) => {
   return (
     <AppBaseForm style={{ marginTop: '10%' }}>
@@ -57,13 +66,38 @@ const CashFlowForm = ({
         placeholder="Empty"
         value={item.dateBegin}
         onChangeText={onDateBeginChange}
+        disabled={hasParent}
       />
       <DateRequisite
         name="Date end"
         placeholder="Empty"
         value={item.dateEnd}
         onChangeText={onDateEndChange}
+        disabled={hasParent}
       />
+      {connectLiabilities && (
+        <ConnectionRequisite
+          title="Connected liabilities"
+          buttonText="Liability"
+          elements={liabilities}
+          selectedElements={connectLiabilities}
+          onSelect={onLiabilitySelect}
+          onDelete={onLiabilityDelete}
+          multiple={false}
+        />
+      )}
+      {connectExpenses && (
+        <ConnectionRequisite
+          title="Connected expenses"
+          buttonText="Expenses"
+          elements={expenses}
+          selectedElements={connectExpenses.connected}
+          lockedElements={connectExpenses.locked}
+          onSelect={connectExpenses.onSelect}
+          onDelete={(item) => connectExpenses.onDelete(item)}
+          multiple={true}
+        />
+      )}
     </AppBaseForm>
   );
 };
@@ -85,6 +119,21 @@ const styles = StyleSheet.create({
   subtitle: {
     color: COLOR.GRAY,
   },
+  connectionWrapper: {
+    paddingVertical: 10,
+  },
+  connectionsTitle: {
+    fontWeight: BOLD,
+    color: COLOR.GRAY,
+    marginBottom: 20,
+  },
 });
 
-export default CashFlowForm;
+function mapStateToProps(state) {
+  return {
+    liabilities: state.liabilities,
+    expenses: state.expenses,
+  };
+}
+
+export default connect(mapStateToProps)(CashFlowForm);

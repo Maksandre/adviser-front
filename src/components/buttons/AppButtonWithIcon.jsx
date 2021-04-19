@@ -1,12 +1,20 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { COLOR } from '../../constants/colors';
-import { BOLD, RADIUS } from '../../constants/commonui';
+import { BOLD, DISABLED_OPACITY, RADIUS } from '../../constants/commonui';
 import { AppText } from '../text';
 
-const AppButtonWithIcon = ({ text, onPress, icon }) => {
+const AppButtonWithIcon = ({ text, onPress, icon, style, disabled }) => {
   return (
-    <TouchableOpacity style={styles.opacity} onPress={onPress}>
+    <TouchableOpacity
+      style={[
+        styles.opacity,
+        style,
+        { opacity: disabled ? DISABLED_OPACITY : 1 },
+      ]}
+      onPress={onPress}
+      disabled={disabled}
+    >
       <View style={styles.icon}>{icon}</View>
       <AppText style={styles.text}>{text}</AppText>
     </TouchableOpacity>

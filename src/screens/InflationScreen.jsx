@@ -10,7 +10,6 @@ import { AppSubtitle } from '../components/text';
 import {
   createInflationRate,
   deleteInflationRate,
-  getInflationRates,
   updateInflationRate,
 } from '../store/actions/inflation';
 
@@ -20,17 +19,12 @@ const itemInitialState = { name: '', rate: '' };
 
 const InflationScreen = ({
   inflationRates,
-  getInflationRates,
   createInflationRate,
   updateInflationRate,
   deleteInflationRate,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(itemInitialState);
-
-  useEffect(() => {
-    getInflationRates();
-  }, []);
 
   const handleClose = () => {
     setModalVisible(false);
@@ -116,7 +110,6 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-  getInflationRates,
   createInflationRate,
   updateInflationRate,
   deleteInflationRate,

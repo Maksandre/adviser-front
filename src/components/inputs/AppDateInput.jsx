@@ -1,18 +1,16 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import React from 'react';
-import { useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { useState } from 'react/cjs/react.development';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { COLOR } from '../../constants/colors';
-import { RADIUS } from '../../constants/commonui';
-import { getMonth, getYear } from '../../utils/dates';
+import { DISABLED_OPACITY, RADIUS } from '../../constants/commonui';
+import { getMonth, getYear, isValid } from '../../utils/dates';
 import { AppText } from '../text';
 import AppPicker from './AppPicker';
 import AppHiddenInput from '../inputs/AppHiddenInput';
 
 const months = [
-  '. . .',
   'January',
   'February',
   'March',
@@ -27,19 +25,20 @@ const months = [
   'December',
 ];
 
-const AppDateInput = ({ date, onChangeText }) => {
-  const [month, setMonth] = useState(months[getMonth(date)]);
+const AppDateInput = ({ date, onChangeText, disabled }) => {
+  const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
 
   useEffect(() => {
-    if (date) {
+    if (isValid(date)) {
+      setMonth(months[getMonth(date) - 1]);
       setYear(getYear(date).toString());
     }
-  }, []);
+  }, [date]);
 
   const handleMonthChange = (text) => {
     setMonth(text);
-    const digit = months.indexOf(text);
+    const digit = months.indexOf(text) + 1;
     const twoDigitMonth = digit < 10 ? `0${digit}` : `${digit}`;
     onChangeText(`${year}-${twoDigitMonth}`);
   };
@@ -47,7 +46,7 @@ const AppDateInput = ({ date, onChangeText }) => {
   const handleYearChange = (text) => {
     const validText = text.replace(/\D/gi, '');
     setYear(validText.substring(0, 4));
-    const digitMonth = months.indexOf(month);
+    const digitMonth = months.indexOf(month) + 1;
     const twoDigitMonth = digitMonth < 10 ? `0${digitMonth}` : `${digitMonth}`;
     onChangeText(`${validText}-${twoDigitMonth}`);
   };
@@ -64,9 +63,14 @@ const AppDateInput = ({ date, onChangeText }) => {
             borderRadius: RADIUS,
             backgroundColor: COLOR.PURE_WHITE,
           }}
-          textStyle={{ alignSelf: 'flex-end', marginRight: 10 }}
+          textStyle={{
+            alignSelf: 'flex-end',
+            marginRight: 10,
+            opacity: disabled ? DISABLED_OPACITY : 1,
+          }}
           height={40}
           elementHeight={40}
+          disabled={disabled}
         />
         <LinearGradient
           style={[styles.gradient, { bottom: 0, height: 10 }]}
@@ -82,7 +86,11 @@ const AppDateInput = ({ date, onChangeText }) => {
       <AppText style={styles.divider}>–</AppText>
       <View>
         <AppHiddenInput
-          style={{ ...styles.input, ...styles.inputYear }}
+          style={{
+            ...styles.input,
+            ...styles.inputYear,
+            color: !disabled ? COLOR.BLACK : 'rgba(0, 0, 0, 0.3);',
+          }}
           value={year}
           onChangeText={handleYearChange}
           onBlur={() => {
@@ -97,8 +105,20 @@ const AppDateInput = ({ date, onChangeText }) => {
           placeholder="year"
           selectTextOnFocus={true}
           keyboardType="number-pad"
+          disabled={disabled}
         />
       </View>
+      {
+        <TouchableOpacity
+          onPress={disabled ? () => {} : () => onChangeText('')}
+        >
+          <MaterialCommunityIcons
+            name={disabled ? 'link' : 'close'}
+            size={24}
+            color={COLOR.BLACK}
+          />
+        </TouchableOpacity>
+      }
     </View>
   );
 };

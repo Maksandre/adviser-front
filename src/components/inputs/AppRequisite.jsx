@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
   },
   name: {
     flex: 2,
-    fontSize: 16,
     fontWeight: BOLD,
   },
   value: {

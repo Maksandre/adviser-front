@@ -17,6 +17,7 @@ const AppPicker = ({
   elementHeight,
   textStyle,
   markStyle,
+  disabled,
 }) => {
   const elHeight = elementHeight ? elementHeight : Math.round(height / 2.2);
 
@@ -25,14 +26,16 @@ const AppPicker = ({
 
   const scrollRef = useRef(null);
   useEffect(() => {
-    setTimeout(() => {
-      // because of Modal
-      scrollRef.current.scrollTo({
-        y: elHeight * elements.indexOf(value),
-        animated: false,
-      });
-    }, 1);
-  }, []);
+    if (value !== undefined) {
+      setTimeout(() => {
+        // because of Modal
+        scrollRef.current.scrollTo({
+          y: elHeight * (value !== null ? elements.indexOf(value) : 0),
+          animated: false,
+        });
+      }, 1);
+    }
+  }, [value]);
 
   const handleChange = ({ nativeEvent }) => {
     const element = nativeEvent.contentOffset.y / elHeight;
@@ -55,6 +58,7 @@ const AppPicker = ({
           ]}
         />
         <ScrollView
+          scrollEnabled={!disabled}
           ref={scrollRef}
           style={styles.scroll}
           snapToInterval={elHeight}
@@ -72,6 +76,7 @@ const AppPicker = ({
                     animated: true,
                   });
                 }}
+                disabled={disabled}
               >
                 <Text
                   style={[

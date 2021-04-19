@@ -4,9 +4,9 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { COLOR } from '../../constants/colors';
 import { RADIUS } from '../../constants/commonui';
 
-const AppGhostButton = ({ onPress }) => {
+const AppGhostButton = ({ onPress, style }) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.opacity}>
+    <TouchableOpacity onPress={onPress} style={[styles.opacity, style]}>
       <MaterialIcons name="add" size={36} color={COLOR.ORANGE} />
     </TouchableOpacity>
   );

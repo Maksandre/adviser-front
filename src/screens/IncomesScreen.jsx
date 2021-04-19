@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import AppView from '../components/AppView';
@@ -8,7 +8,6 @@ import CashFlowModal from '../components/modal/CashFlowModal';
 import { AppSubtitle } from '../components/text';
 import AppCreateButton from '../components/buttons/AppCreateButton';
 import {
-  getIncomes,
   createIncome,
   updateIncome,
   deleteIncome,
@@ -22,18 +21,12 @@ const itemInitialState = {
 
 const IncomesScreen = ({
   incomes,
-  getIncomes,
   createIncome,
   updateIncome,
   deleteIncome,
 }) => {
   const [selectedItem, setSelectedItem] = useState(itemInitialState);
   const [modalVisible, setModalVisisble] = useState(false);
-  // console.log(selectedItem);
-
-  useEffect(() => {
-    getIncomes();
-  }, [setSelectedItem]);
 
   const handleClose = () => {
     setModalVisisble(false);
@@ -129,7 +122,6 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-  getIncomes,
   createIncome,
   updateIncome,
   deleteIncome,

@@ -16,3 +16,9 @@ export function query(sqlQuery, args, callback, errorCallback) {
     });
   });
 }
+
+export function enableForeignKeys() {
+  db.exec([{ sql: 'PRAGMA foreign_keys = ON;', args: [] }], false, () =>
+    console.log('Foreign keys turned on'),
+  );
+}

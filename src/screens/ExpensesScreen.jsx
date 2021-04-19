@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import AppView from '../components/AppView';
@@ -8,7 +8,6 @@ import CashFlowModal from '../components/modal/CashFlowModal';
 import { AppSubtitle } from '../components/text';
 import AppCreateButton from '../components/buttons/AppCreateButton';
 import {
-  getExpenses,
   createExpense,
   updateExpense,
   deleteExpense,
@@ -22,7 +21,7 @@ const itemInitialState = {
 
 const ExpensesScreen = ({
   expenses,
-  getExpenses,
+  liabilities,
   createExpense,
   updateExpense,
   deleteExpense,
@@ -30,9 +29,7 @@ const ExpensesScreen = ({
   const [selectedItem, setSelectedItem] = useState(itemInitialState);
   const [modalVisible, setModalVisisble] = useState(false);
 
-  useEffect(() => {
-    getExpenses();
-  }, [setSelectedItem]);
+  console.log('selectedItem', selectedItem);
 
   const handleClose = () => {
     setModalVisisble(false);
@@ -79,6 +76,22 @@ const ExpensesScreen = ({
     <AppView>
       <CashFlowModal
         item={selectedItem}
+        connectLiabilities={liabilities.filter(
+          (l) => l.id === selectedItem.liabilityId,
+        )}
+        onLiabilityDelete={() => {
+          const newItem = { ...selectedItem };
+          delete newItem.liabilityId;
+          setSelectedItem(newItem);
+        }}
+        onLiabilitySelect={(liability) => {
+          setSelectedItem({
+            ...selectedItem,
+            dateBegin: liability.dateBegin,
+            dateEnd: liability.dateEnd,
+            liabilityId: liability.id,
+          });
+        }}
         titlePlaceholder="Expense name"
         subtitle="Monthly expense"
         isVisible={modalVisible}
@@ -97,6 +110,7 @@ const ExpensesScreen = ({
         onSubmit={handleSubmit}
         onDelete={handleDelete}
         onClose={handleClose}
+        hasParent={selectedItem.liabilityId}
       />
       <View style={styles.titleContainer}>
         <AppSubtitle>Monthly expenses</AppSubtitle>
@@ -124,11 +138,11 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     expenses: state.expenses,
+    liabilities: state.liabilities,
   };
 }
 
 const mapDispatchToProps = {
-  getExpenses,
   createExpense,
   updateExpense,
   deleteExpense,

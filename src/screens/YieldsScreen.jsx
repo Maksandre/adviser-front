@@ -7,30 +7,15 @@ import AppCreateButton from '../components/buttons/AppCreateButton';
 import RateList from '../components/lists/economy/RateList';
 import RateModal from '../components/modal/RateModal';
 import { AppSubtitle } from '../components/text';
-import {
-  createYield,
-  deleteYield,
-  getYields,
-  updateYield,
-} from '../store/actions/economy';
+import { createYield, deleteYield, updateYield } from '../store/actions/yields';
 
 LogBox.ignoreLogs(['VirtualizedLists should never be nested']); // TODO wait for fix on github
 
 const itemInitialState = { name: '', rate: '' };
 
-const YieldsScreen = ({
-  yields,
-  getYields,
-  createYield,
-  updateYield,
-  deleteYield,
-}) => {
+const YieldsScreen = ({ yields, createYield, updateYield, deleteYield }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(itemInitialState);
-
-  useEffect(() => {
-    getYields();
-  }, []);
 
   const handleClose = () => {
     setModalVisible(false);
@@ -115,7 +100,6 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-  getYields,
   updateYield,
   deleteYield,
   createYield,

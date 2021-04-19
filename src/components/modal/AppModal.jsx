@@ -43,7 +43,9 @@ const AppModal = ({
                 />
               </TouchableOpacity>
             )}
-            {title && <AppSectionTitle>{title}</AppSectionTitle>}
+            {title && (
+              <AppSectionTitle style={styles.title}>{title}</AppSectionTitle>
+            )}
             {children}
           </KeyboardAvoidingView>
           <View style={styles.bottom}>
@@ -79,6 +81,9 @@ const styles = StyleSheet.create({
   modalView: {
     flex: 1,
     justifyContent: 'space-between',
+  },
+  title: {
+    marginTop: '10%',
   },
   content: {
     flex: 4,

@@ -5,12 +5,18 @@ import AppModal from './AppModal';
 
 const CashFlowModal = ({
   item,
+  hasParent,
+  assets,
   titlePlaceholder,
   subtitle,
   onTitleChange,
   onAmountChange,
   onDateBeginChange,
   onDateEndChange,
+  connectLiabilities,
+  onLiabilitySelect,
+  onLiabilityDelete,
+  connectExpenses,
   onSubmit,
   onDelete,
   isVisible,
@@ -26,6 +32,12 @@ const CashFlowModal = ({
     >
       <CashFlowForm
         item={item}
+        hasParent={hasParent}
+        assets={assets}
+        connectLiabilities={connectLiabilities}
+        onLiabilitySelect={onLiabilitySelect}
+        onLiabilityDelete={onLiabilityDelete}
+        connectExpenses={connectExpenses}
         titlePlaceholder={titlePlaceholder}
         subtitle={subtitle}
         onTitleChange={onTitleChange}

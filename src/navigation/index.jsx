@@ -1,16 +1,22 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { getUser } from '../store/actions/user';
 import { AppNavigation } from './AppNavigation';
 import { LoginNavigation } from './LoginNavigation';
+import Actions from '../store/actions';
 
-const RootNavigation = ({ getUser, user }) => {
+const RootNavigation = (props) => {
   useEffect(() => {
-    getUser();
+    props.getUser();
+    props.getInflation();
+    props.getYields();
+    props.getIncomes();
+    props.getExpenses();
+    props.getLiabilities();
   }, []);
 
-  return user ? <AppNavigation /> : <LoginNavigation />; // TODO reverse for testing
+  return <AppNavigation />;
+  // return props.user ? <AppNavigation /> : <LoginNavigation />; // TODO login
 };
 
 function mapStateToProps(state) {
@@ -19,6 +25,13 @@ function mapStateToProps(state) {
   };
 }
 
-const mapDispatchToProps = { getUser };
+const mapDispatchToProps = {
+  getUser: Actions.user.getUser,
+  getInflation: Actions.inflation.getInflationRates,
+  getYields: Actions.yields.getYields,
+  getIncomes: Actions.income.getIncomes,
+  getExpenses: Actions.expense.getExpenses,
+  getLiabilities: Actions.liability.getLiabilities,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(RootNavigation);

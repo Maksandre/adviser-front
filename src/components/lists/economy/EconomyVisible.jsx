@@ -4,9 +4,10 @@ import { COLOR } from '../../../constants/colors';
 import { BOLD } from '../../../constants/commonui';
 import { AppText } from '../../text';
 
-const EconomyVisible = ({ left, right }) => {
+const EconomyVisible = ({ left, right, Icon }) => {
   return (
     <View style={styles.container}>
+      {Icon && <Icon />}
       <AppText style={{ ...styles.text, ...styles.textName }}>{left}</AppText>
       <AppText style={{ ...styles.text, ...styles.textRate }}>{right}</AppText>
     </View>

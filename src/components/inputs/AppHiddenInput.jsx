@@ -17,6 +17,7 @@ const AppHiddenInput = ({
   keyboardType,
   multiline,
   selectTextOnFocus,
+  disabled,
 }) => {
   const [focused, setFocused] = useState(false);
 
@@ -49,6 +50,7 @@ const AppHiddenInput = ({
       onBlur={handleBlur}
       multiline={multiline}
       selectTextOnFocus={selectTextOnFocus}
+      editable={!disabled}
     />
   );
 };

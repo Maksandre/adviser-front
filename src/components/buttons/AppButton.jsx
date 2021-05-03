@@ -24,7 +24,7 @@ const AppButton = (props) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: COLOR.BLUE,
-    paddingVertical: 25,
+    paddingVertical: 10,
     borderRadius: RADIUS,
   },
   containerPressed: {

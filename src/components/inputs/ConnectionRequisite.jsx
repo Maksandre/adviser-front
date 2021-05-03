@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { BOLD } from '../../constants/commonui';
 
 import AppConnectButton from '../buttons/AppConnectButton';
 import ConnectionModal from '../modal/ConnectionModal.jsx';
-import { AppText } from '../text';
 import ConnectionRequisiteItem from './ConnectionRequisiteItem';
 
 const ConnectionRequisite = ({
@@ -21,7 +19,6 @@ const ConnectionRequisite = ({
 
   return (
     <View style={styles.wrapper}>
-      <AppText style={styles.title}>{title}</AppText>
       <View style={[styles.buttons]}>
         {selectedElements.map((element) => {
           return (
@@ -63,13 +60,6 @@ const ConnectionRequisite = ({
 };
 
 const styles = StyleSheet.create({
-  wrapper: {
-    paddingVertical: 20,
-  },
-  title: {
-    marginBottom: 20,
-    fontWeight: BOLD,
-  },
   buttons: {
     flexDirection: 'row',
     alignItems: 'center',

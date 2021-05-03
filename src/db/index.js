@@ -2,6 +2,7 @@ import { economy } from './economy';
 import { incomes } from './incomes';
 import { expenses } from './expenses';
 import { liabilities } from './liabilities';
+import { assets } from './assets';
 import { enableForeignKeys, query } from './sql';
 
 export default DB = {
@@ -18,15 +19,19 @@ export default DB = {
       ),
       query(
         // 'DROP TABLE incomes',
-        'CREATE TABLE IF NOT EXISTS incomes (income_id INTEGER PRIMARY KEY NOT NULL, name TEXT NOT NULL, amount REAL NOT NULL, dateBegin TEXT, dateEnd TEXT, position INTEGER NOT NULL)',
+        'CREATE TABLE IF NOT EXISTS incomes (income_id INTEGER PRIMARY KEY NOT NULL, name TEXT NOT NULL, amount REAL NOT NULL, assetId INTEGER REFERENCES assets(asset_id) ON DELETE SET NULL, dateBegin TEXT, dateEnd TEXT, position INTEGER NOT NULL)',
       ),
       query(
         // 'DROP TABLE expenses',
-        'CREATE TABLE IF NOT EXISTS expenses (expense_id INTEGER PRIMARY KEY NOT NULL, name TEXT NOT NULL, amount REAL NOT NULL, liabilityId INTEGER REFERENCES liabilities(liability_id) ON DELETE SET NULL, dateBegin TEXT, dateEnd TEXT, position INTEGER NOT NULL)',
+        'CREATE TABLE IF NOT EXISTS expenses (expense_id INTEGER PRIMARY KEY NOT NULL, name TEXT NOT NULL, amount REAL NOT NULL, liabilityId INTEGER REFERENCES liabilities(liability_id) ON DELETE SET NULL, assetId INTEGER REFERENCES assets(asset_id) ON DELETE SET NULL, dateBegin TEXT, dateEnd TEXT, position INTEGER NOT NULL)',
       ),
       query(
         // 'DROP TABLE liabilities',
-        'CREATE TABLE IF NOT EXISTS liabilities (liability_id INTEGER PRIMARY KEY NOT NULL, name TEXT NOT NULL, amount REAL NOT NULL, dateBegin TEXT, dateEnd TEXT, position INTEGER NOT NULL)',
+        'CREATE TABLE IF NOT EXISTS liabilities (liability_id INTEGER PRIMARY KEY NOT NULL, name TEXT NOT NULL, amount REAL NOT NULL, assetId INTEGER REFERENCES assets(asset_id) ON DELETE SET NULL, dateBegin TEXT, dateEnd TEXT, position INTEGER NOT NULL)',
+      ),
+      query(
+        // 'DROP TABLE liabilities',
+        'CREATE TABLE IF NOT EXISTS assets (asset_id INTEGER PRIMARY KEY NOT NULL, name TEXT NOT NULL, amount REAL NOT NULL, dateBegin TEXT, dateEnd TEXT, position INTEGER NOT NULL)',
       ),
     );
   },
@@ -34,4 +39,5 @@ export default DB = {
   incomes,
   expenses,
   liabilities,
+  assets,
 };

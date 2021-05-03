@@ -6,18 +6,13 @@ import { connect } from 'react-redux';
 import { COLOR } from '../../constants/colors';
 import { BOLD } from '../../constants/commonui';
 import AppHiddenInput from '../inputs/AppHiddenInput';
-import ConnectionRequisite from '../inputs/ConnectionRequisite';
 import DateRequisite from '../inputs/DateRequisite';
 import TextRequisite from '../inputs/TextRequisite';
 import { AppText } from '../text';
 import { AppBaseForm } from './AppBaseForm';
 
-const CashFlowForm = ({
+const EntityForm = ({
   item,
-  connectLiabilities,
-  onLiabilitySelect,
-  onLiabilityDelete,
-  connectExpenses,
   titlePlaceholder,
   subtitle,
   onTitleChange,
@@ -27,8 +22,7 @@ const CashFlowForm = ({
   onDelete,
   hasParent,
   isNew,
-  liabilities,
-  expenses,
+  children,
 }) => {
   return (
     <AppBaseForm style={{ marginTop: '10%' }}>
@@ -75,29 +69,7 @@ const CashFlowForm = ({
         onChangeText={onDateEndChange}
         disabled={hasParent}
       />
-      {connectLiabilities && (
-        <ConnectionRequisite
-          title="Connected liabilities"
-          buttonText="Liability"
-          elements={liabilities}
-          selectedElements={connectLiabilities}
-          onSelect={onLiabilitySelect}
-          onDelete={onLiabilityDelete}
-          multiple={false}
-        />
-      )}
-      {connectExpenses && (
-        <ConnectionRequisite
-          title="Connected expenses"
-          buttonText="Expenses"
-          elements={expenses}
-          selectedElements={connectExpenses.connected}
-          lockedElements={connectExpenses.locked}
-          onSelect={connectExpenses.onSelect}
-          onDelete={(item) => connectExpenses.onDelete(item)}
-          multiple={true}
-        />
-      )}
+      {children}
     </AppBaseForm>
   );
 };
@@ -136,4 +108,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(CashFlowForm);
+export default connect(mapStateToProps)(EntityForm);

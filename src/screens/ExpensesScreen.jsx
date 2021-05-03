@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import AppView from '../components/AppView';
 import ValuableList from '../components/lists/economy/ValuableList';
-import CashFlowModal from '../components/modal/CashFlowModal';
+import ExpenseEntityModal from '../components/modal/ExpenseEntityModal';
 import { AppSubtitle } from '../components/text';
 import AppCreateButton from '../components/buttons/AppCreateButton';
 import {
@@ -21,15 +21,12 @@ const itemInitialState = {
 
 const ExpensesScreen = ({
   expenses,
-  liabilities,
   createExpense,
   updateExpense,
   deleteExpense,
 }) => {
   const [selectedItem, setSelectedItem] = useState(itemInitialState);
   const [modalVisible, setModalVisisble] = useState(false);
-
-  console.log('selectedItem', selectedItem);
 
   const handleClose = () => {
     setModalVisisble(false);
@@ -72,26 +69,40 @@ const ExpensesScreen = ({
     });
   };
 
+  const handleDeleteLiability = () => {
+    setSelectedItem({ ...selectedItem, liabilityId: null });
+  };
+
+  const handleSelectLiability = (liability) => {
+    setSelectedItem({
+      ...selectedItem,
+      dateBegin: liability.dateBegin,
+      dateEnd: liability.dateEnd,
+      liabilityId: liability.id,
+    });
+  };
+
+  const handleSelectAsset = (asset) => {
+    setSelectedItem({
+      ...selectedItem,
+      dateBegin: asset.dateBegin,
+      dateEnd: asset.dateEnd,
+      assetId: asset.id,
+    });
+  };
+
+  const handleDeleteAsset = () => {
+    setSelectedItem({ ...selectedItem, assetId: null });
+  };
+
   return (
     <AppView>
-      <CashFlowModal
+      <ExpenseEntityModal
         item={selectedItem}
-        connectLiabilities={liabilities.filter(
-          (l) => l.id === selectedItem.liabilityId,
-        )}
-        onLiabilityDelete={() => {
-          const newItem = { ...selectedItem };
-          delete newItem.liabilityId;
-          setSelectedItem(newItem);
-        }}
-        onLiabilitySelect={(liability) => {
-          setSelectedItem({
-            ...selectedItem,
-            dateBegin: liability.dateBegin,
-            dateEnd: liability.dateEnd,
-            liabilityId: liability.id,
-          });
-        }}
+        onLiabilityAdd={handleSelectLiability}
+        onLiabilityDelete={handleDeleteLiability}
+        onAssetAdd={handleSelectAsset}
+        onAssetDelete={handleDeleteAsset}
         titlePlaceholder="Expense name"
         subtitle="Monthly expense"
         isVisible={modalVisible}
@@ -110,7 +121,7 @@ const ExpensesScreen = ({
         onSubmit={handleSubmit}
         onDelete={handleDelete}
         onClose={handleClose}
-        hasParent={selectedItem.liabilityId}
+        hasParent={selectedItem.liabilityId || selectedItem.assetId}
       />
       <View style={styles.titleContainer}>
         <AppSubtitle>Monthly expenses</AppSubtitle>
@@ -138,7 +149,6 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     expenses: state.expenses,
-    liabilities: state.liabilities,
   };
 }
 

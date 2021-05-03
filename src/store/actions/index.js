@@ -4,6 +4,7 @@ import * as inflation from './inflation';
 import * as expense from './expense.js';
 import * as income from './income';
 import * as liability from './liability';
+import * as asset from './asset';
 import * as user from './user';
 
 export default {
@@ -13,5 +14,6 @@ export default {
   expense,
   income,
   liability,
+  asset,
   user,
 };

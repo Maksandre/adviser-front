@@ -1,20 +1,24 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 import AppGhostButton from '../../buttons/AppGhostButton';
 import AppDraggableList from '../AppDraggableList';
 import LiabilityListItem from './LiabilityListItem';
 
 const LiabilityList = ({
   data,
-  expenses,
+  connectExpensesBy,
   onDragEnd,
   onPressEdit,
   onAddPress,
+  expenses,
 }) => {
   const renderItem = ({ item, drag, isActive }) => (
     <LiabilityListItem
       item={item}
-      connectedExpenses={expenses?.filter((e) => e.liabilityId === item.id)}
+      connectedExpenses={expenses.filter(
+        (e) => connectExpensesBy(e) === item.id,
+      )}
       onPressEdit={() => onPressEdit(item)}
       onLongPress={drag}
       isActive={isActive}
@@ -39,4 +43,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LiabilityList;
+function mapStateToProps(state) {
+  return {
+    expenses: state.expenses,
+  };
+}
+
+export default connect(mapStateToProps)(LiabilityList);

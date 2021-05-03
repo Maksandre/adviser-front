@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import AppView from '../components/AppView';
 import ValuableList from '../components/lists/economy/ValuableList';
-import CashFlowModal from '../components/modal/CashFlowModal';
+import IncomeEntityModal from '../components/modal/IncomeEntityModal';
 import { AppSubtitle } from '../components/text';
 import AppCreateButton from '../components/buttons/AppCreateButton';
 import {
@@ -27,6 +27,8 @@ const IncomesScreen = ({
 }) => {
   const [selectedItem, setSelectedItem] = useState(itemInitialState);
   const [modalVisible, setModalVisisble] = useState(false);
+
+  console.log('selectedItem', selectedItem);
 
   const handleClose = () => {
     setModalVisisble(false);
@@ -69,10 +71,26 @@ const IncomesScreen = ({
     });
   };
 
+  const handleAssetAdd = (asset) => {
+    setSelectedItem({
+      ...selectedItem,
+      dateBegin: asset.dateBegin,
+      dateEnd: asset.dateEnd,
+      assetId: asset.id,
+    });
+  };
+
+  const handleAssetDelete = () => {
+    setSelectedItem({ ...selectedItem, assetId: null });
+  };
+
   return (
     <AppView>
-      <CashFlowModal
+      <IncomeEntityModal
         item={selectedItem}
+        onAssetAdd={handleAssetAdd}
+        onAssetDelete={handleAssetDelete}
+        hasParent={selectedItem.assetId}
         titlePlaceholder="Income name"
         subtitle="Monthly income"
         isVisible={modalVisible}

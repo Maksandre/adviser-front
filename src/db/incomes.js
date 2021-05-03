@@ -6,13 +6,13 @@ export const incomes = {
       resolve(result.rows._array),
     ),
 
-  createIncome: ({ name, amount, position, dateBegin, dateEnd }) =>
+  createIncome: ({ name, amount, assetId, position, dateBegin, dateEnd }) =>
     query(
       `
-      INSERT INTO incomes (name, amount, position, dateBegin, dateEnd)
-      VALUES (?, ?, ?, ?, ?)
+      INSERT INTO incomes (name, amount, assetId, position, dateBegin, dateEnd)
+      VALUES (?, ?, ?, ?, ?, ?)
       `,
-      [name, amount, position, dateBegin, dateEnd],
+      [name, amount, assetId, position, dateBegin, dateEnd],
       (_, result, resolve) => resolve(result.insertId),
     ),
 
@@ -22,6 +22,7 @@ export const incomes = {
       UPDATE incomes
       SET name = ?,
           amount = ?,
+          assetId = ?,
           position = ?,
           dateBegin = ?, 
           dateEnd = ?
@@ -29,6 +30,7 @@ export const incomes = {
       [
         income.name,
         income.amount,
+        income.assetId,
         income.position,
         income.dateBegin,
         income.dateEnd,

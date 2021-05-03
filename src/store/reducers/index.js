@@ -5,6 +5,7 @@ import { economyReducer } from './economy';
 import { incomesReducer } from './incomes';
 import { expenseReducer } from './expenses';
 import { liabilityReducer } from './liabilities';
+import { assetReducer } from './assets';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   incomes: incomesReducer,
   expenses: expenseReducer,
   liabilities: liabilityReducer,
+  assets: assetReducer,
   apiCallsInProgress: apiStatusReducer,
 });
 

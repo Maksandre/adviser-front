@@ -13,15 +13,16 @@ export const expenses = {
     amount,
     position,
     liabilityId,
+    assetId,
     dateBegin,
     dateEnd,
   }) =>
     query(
       `
-      INSERT INTO expenses (name, amount, position, liabilityId, dateBegin, dateEnd)
-      VALUES (?, ?, ?, ?, ?, ?)
+      INSERT INTO expenses (name, amount, position, liabilityId, assetId, dateBegin, dateEnd)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
       `,
-      [name, amount, position, liabilityId, dateBegin, dateEnd],
+      [name, amount, position, liabilityId, assetId, dateBegin, dateEnd],
       (_, result, resolve) => resolve(result.insertId),
     ),
 
@@ -33,6 +34,7 @@ export const expenses = {
           amount = ?,
           position = ?,
           liabilityId = ?,
+          assetId = ?,
           dateBegin = ?, 
           dateEnd = ?
       WHERE expense_id = ?`,
@@ -41,6 +43,7 @@ export const expenses = {
         expense.amount,
         expense.position,
         expense.liabilityId,
+        expense.assetId,
         expense.dateBegin,
         expense.dateEnd,
         expense.id,

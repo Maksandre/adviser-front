@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import AppView from '../components/AppView';
 import LiabilityList from '../components/lists/economy/LiabilityList';
-import CashFlowModal from '../components/modal/CashFlowModal';
+import LiabilityEntityModal from '../components/modal/LiabilityEntityModal';
 import { AppSubtitle } from '../components/text';
 import AppCreateButton from '../components/buttons/AppCreateButton';
 import {
@@ -15,6 +15,7 @@ import {
 import { getExpenses } from '../store/actions/expense';
 import { removeItemAlert } from '../components/alerts/removeItemAlert';
 import { updateExpense } from '../store/actions/expense';
+import { SelectedEntitiesContext } from '../context/Selected';
 
 const itemInitialState = {
   name: '',
@@ -32,14 +33,14 @@ const LiabilitiesScreen = ({
 }) => {
   const [selectedItem, setSelectedItem] = useState(itemInitialState);
   const [connectedExpenses, setConnectedExpenses] = useState([]);
-  const [lockedExpenses, setLockedExpenses] = useState([]);
   const [modalVisible, setModalVisisble] = useState(false);
+
+  console.log('selectedItem', selectedItem);
 
   const handleClose = () => {
     setModalVisisble(false);
     setSelectedItem(itemInitialState);
     setConnectedExpenses([]);
-    setLockedExpenses([]);
   };
 
   const handleDragEnd = (data) => {
@@ -82,15 +83,11 @@ const LiabilitiesScreen = ({
   const handleEditClick = (item) => {
     setSelectedItem(item);
     setConnectedExpenses(expenses.filter((exp) => exp.liabilityId === item.id));
-    setLockedExpenses(
-      expenses.filter((exp) => exp.liabilityId && exp.liabilityId !== item.id),
-    );
     setModalVisisble(true);
   };
 
   const handleAddPress = () => {
     setSelectedItem(itemInitialState);
-    setLockedExpenses(expenses.filter((exp) => exp.liabilityId));
     setModalVisisble(true);
   };
 
@@ -118,46 +115,60 @@ const LiabilitiesScreen = ({
     }
   };
 
+  const handleAssetSelect = (asset) => {
+    setSelectedItem({
+      ...selectedItem,
+      dateBegin: asset.dateBegin,
+      dateEnd: asset.dateEnd,
+      assetId: asset.id,
+    });
+  };
+
+  const handleAssetDelete = () => {
+    setSelectedItem({ ...selectedItem, assetId: null });
+  };
+
   return (
     <AppView>
-      <CashFlowModal
-        item={selectedItem}
-        titlePlaceholder="Liability name"
-        subtitle="Liability"
-        isVisible={modalVisible}
-        connectExpenses={{
-          connected: connectedExpenses,
-          locked: lockedExpenses,
-          onDelete: handleExpenseDelete,
-          onSelect: handleExpenseSelect,
-        }}
-        onTitleChange={(text) =>
-          setSelectedItem({ ...selectedItem, name: text })
-        }
-        onAmountChange={(text) =>
-          setSelectedItem({ ...selectedItem, amount: text })
-        }
-        onDateBeginChange={(text) => {
-          setSelectedItem({ ...selectedItem, dateBegin: text });
-        }}
-        onDateEndChange={(text) => {
-          setSelectedItem({ ...selectedItem, dateEnd: text });
-        }}
-        onSubmit={handleSubmit}
-        onDelete={handleDelete}
-        onClose={handleClose}
-      />
-      <View style={styles.titleContainer}>
-        <AppSubtitle>Liabilities and debts</AppSubtitle>
-        <AppCreateButton onPress={handleAddPress} />
-      </View>
-      <LiabilityList
-        data={liabilities.sort((a, b) => b.position - a.position)}
-        expenses={expenses}
-        onDragEnd={handleDragEnd}
-        onPressEdit={handleEditClick}
-        onAddPress={handleAddPress}
-      />
+      <SelectedEntitiesContext.Provider value={{ expenses: connectedExpenses }}>
+        <LiabilityEntityModal
+          item={selectedItem}
+          onAssetSelect={handleAssetSelect}
+          onAssetDelete={handleAssetDelete}
+          onExpenseSelect={handleExpenseSelect}
+          onExpenseDelete={handleExpenseDelete}
+          titlePlaceholder="Liability name"
+          subtitle="Liability"
+          isVisible={modalVisible}
+          onTitleChange={(text) =>
+            setSelectedItem({ ...selectedItem, name: text })
+          }
+          onAmountChange={(text) =>
+            setSelectedItem({ ...selectedItem, amount: text })
+          }
+          onDateBeginChange={(text) => {
+            setSelectedItem({ ...selectedItem, dateBegin: text });
+          }}
+          onDateEndChange={(text) => {
+            setSelectedItem({ ...selectedItem, dateEnd: text });
+          }}
+          hasParent={selectedItem.assetId}
+          onSubmit={handleSubmit}
+          onDelete={handleDelete}
+          onClose={handleClose}
+        />
+        <View style={styles.titleContainer}>
+          <AppSubtitle>Liabilities and debts</AppSubtitle>
+          <AppCreateButton onPress={handleAddPress} />
+        </View>
+        <LiabilityList
+          data={liabilities.sort((a, b) => b.position - a.position)}
+          connectExpensesBy={(expense) => expense.liabilityId}
+          onDragEnd={handleDragEnd}
+          onPressEdit={handleEditClick}
+          onAddPress={handleAddPress}
+        />
+      </SelectedEntitiesContext.Provider>
     </AppView>
   );
 };

@@ -13,6 +13,7 @@ const RootNavigation = (props) => {
     props.getIncomes();
     props.getExpenses();
     props.getLiabilities();
+    props.getAssets();
   }, []);
 
   return <AppNavigation />;
@@ -32,6 +33,7 @@ const mapDispatchToProps = {
   getIncomes: Actions.income.getIncomes,
   getExpenses: Actions.expense.getExpenses,
   getLiabilities: Actions.liability.getLiabilities,
+  getAssets: Actions.asset.getAssets,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RootNavigation);
